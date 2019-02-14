@@ -5,7 +5,7 @@ var customer_api = require('../models/api/provider')
 var chat_historyModel = require('../models/chat_history') 
 
 var order_api = require('../models/api/order')
-var multer = require('multer');
+var multer = require('multer'); 
 var Storage = multer.diskStorage({
     destination: function(req, file, callback) {
         callback(null, "../upload");
