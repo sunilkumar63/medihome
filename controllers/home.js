@@ -16,14 +16,9 @@ var Storage = multer.diskStorage({
 });
 var upload = multer({ storage: Storage })
 
-router.get('/' , (req, res , next) =>{
-    res.render('index');
-})
-
 router.get('/api/test' , async (req, res , next) =>{
     res.json(global.presc_image_path)
 })
-
 
 router.post('/api/customer/register' , (req, res , next) =>{
   customer_api.saveCustomer(req.body)
