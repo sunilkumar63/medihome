@@ -1,0 +1,94 @@
+body{
+    padding: 0px;
+    margin: 0px;
+}
+ul.inline{ list-style: none;}
+ul.inline > li{
+    float: left;
+    padding:10px;
+}
+i {
+    margin-right: 5px;
+}
+a{
+    text-decoration: none !important;
+}
+div.inline{
+    display: inline-block !important;
+}
+.hide{
+    display: none !important;
+}
+.show{
+    display: block !important;
+}
+button{
+    border: 1px solid #34d986;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: capitalize;
+    letter-spacing: 0.1em;
+    color: #383749;
+    text-decoration: none;
+    padding: 14px;
+    width: auto;
+    margin: 4px;
+}
+button.sm{
+    padding: 10px 10px !important;
+    text-transform: unset;
+}
+.box button{
+    width : 100%;
+}
+
+.theme-color-bg , success{background:  #34d986 !important }
+.theme-color{background:  #34d986 !important }
+.warning { background:  darkorange; }
+.messages{
+    opacity: 0.9;
+    color: #ffffff;
+    text-transform: capitalize;
+    font-size: 17px;
+}
+.messages  .success{
+    background:  #34d986 !important;
+}
+a{
+    text-decoration: none;
+}
+left{ float: left; }
+right{ float: right; }
+.center{ margin: 0 auto;}
+.text-center{ text-align: center;}
+/* GRID COLUMN */
+.width20 { width: 20%;}
+.width30 { width: 30%;}
+.width40 { width: 40%;}
+.width50 { width: 50%;}
+.width60 { width: 60%;}
+.width70 { width: 70%;}
+
+form button {
+    /*float: right;*/
+    /*position: relative;*/
+    bottom: 13px;
+}
+.form-group {
+    margin-bottom : 10px; 
+}
+.form-group label {
+    min-width: 30%;
+    display: inline-block;
+}
+.form-group input,.form-group select ,.form-group textarea {
+min-width: 40%;
+min-height: 20px
+}
+.clearfix{
+    content: "";
+    display: table;
+    clear: both;
+}

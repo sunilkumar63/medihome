@@ -1,0 +1,142 @@
+.admin-wrapper {
+ color: black;  
+ /* background: #00a65a2b;  */
+}
+
+.admin-wrapper .header{
+    /* background: #8dca6138; */
+    /* border: 1px solid red; */
+    /* position: fixed; */
+    width: 100%;
+    height: 50px;
+}
+.admin-wrapper a{
+    color: black;
+}
+.main-sidebar{
+    /* background: #8dca6138; */
+    /* margin-top: 10px; */
+}
+.admin-wrapper .view{
+    /* margin-left: 230px; */
+    padding-left: 15px;
+    /* min-height: 100vh; */
+    background: none !important;
+    position: relative;
+}
+.view > .title{
+    /* margin-left: 120px; */
+    /* text-align: left !important; */
+}
+.view .control-wrapper{
+    /* position:fixed; */
+    top:60px;
+    right: 160px;
+}
+.view .block .list{
+    max-height: 400px;
+    overflow-y: auto;
+}
+.page-head{
+    /* margin-bottom: 25px; */
+    width: 100%;
+    margin-bottom: 10px;
+}
+.page-head .title-wrapper{
+    /* width: 30%; */
+    float: left;
+    max-width: 30%;
+}
+.page-head .control-wrapper{
+    float: right;
+    margin-right: 20px;
+    /* display: flex; */
+max-width: 72%;
+}
+.block{
+    padding: 0;
+    margin-right: 10px;
+}
+.block div{
+ text-transform: capitalize;
+}
+.sweet-alert h2{
+    font-size: 28px !important;
+}
+table thead td{
+font-weight: 600;
+}
+table tr td{
+margin:10px !important;
+padding:8px;
+/* border: 1px solid black !important; */
+}
+.tab-view form label{
+    margin: 0;
+    padding: 0;
+}
+.label{
+    color: #000;
+}
+form label{
+    /* font-size: 25px !important; */
+  }
+.tab-view .block{
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+.tab-view .chat{
+    /* border-bottom: 2px solid #ddd; */
+    margin: 10px;
+}
+form[name=msg-box] textarea{
+    border: none;
+    background: none;
+}
+.tab-view .block .sub{
+padding: 5px;
+}
+.dashview .block .title,.tab-view .block .title{
+background: #ffff;
+border-bottom: 2px solid #ddd;
+padding: 5px;
+}
+.profile-grid .view-wrapper{
+    display: flex ;
+    flex-direction: row;
+}
+.profile-grid .view-wrapper .item{
+    width: 50%;
+    background: #acd4ad4f;
+    padding: 15px;
+    margin: 8px;
+    /* border: 1px solid mediumseagreen; */
+    display: inline-block;
+}
+.profile-grid .view-wrapper .item .content{
+    min-height: auto;
+    padding: 0px;
+}
+.profile-grid .view-wrapper .item:hover{
+background: whitesmoke;
+}
+.profile-grid .view-wrapper .item .title{
+    font-weight: 600;
+}
+table.expand tr td{
+padding : 0px 20px 0px 20px;
+font-size: 20px;
+}
+.tab-view > .title{
+    font-size: 25px;
+    margin-bottom: 10px;
+    /* text-align: center; */
+}
+html{
+    font-size: 70.5%;
+}
+@media (max-width: 767px) {
+.admin-wrapper .view, .main-footer {
+    margin-left: 0;
+}
+}

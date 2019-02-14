@@ -1,0 +1,47 @@
+{
+  "name": "medicare",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "nodemon": "nodemon -e ejs,js ",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "dev": "concurrently \"npm start\" \"cd client && npm start\""
+  },
+  "engines": {
+    "node": "8.9.4"
+  },
+  "dependencies": {
+    "change-case": "^3.0.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.3",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "ejs-locals": "^1.0.2",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.1-alpha.1",
+    "express-flash": "0.0.2",
+    "express-generator": "^4.16.0",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.0",
+    "http": "0.0.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.8",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-sequence": "^4.0.1",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "nodemailer": "^5.1.1",
+    "nodemon": "^1.18.8",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+    "reload": "^2.4.0",
+    "request": "^2.88.0",
+    "response-time": "^2.3.2",
+    "web-push": "^3.3.3"
+  },
+  "devDependencies": {}
+}

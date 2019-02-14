@@ -1,0 +1,27 @@
+.header{
+    background: rgba(204, 204, 204,1);
+    /* border: 1px solid red; */
+    /* position: fixed; */
+    width: 100%;
+    height: 50px;
+}
+
+.main-sidebar{
+    background: rgba(204, 204, 204,1);
+    margin-top: 50px;
+}
+.view{
+    background-color : none;
+    margin-left: 240px;
+} 
+.tab-view .block{
+    padding: 10px;
+    background: #DDDDDD;
+}  
+.view .tab-view .block .title{
+    font-size: 20px !important;
+}
+.main-header .navbar{
+    margin-left: 0px !important;
+    background: none;
+}
