@@ -41,9 +41,9 @@ editRow=(item) =>{
                     </thead>
                     <tbody>
                         { data.map( (banner,index) => {
-                             var  image=  require(`../../images/banner/${banner.filename}`)      
+                            //  var  image=  require(`../../images/banner/${banner.filename}`)      
                             return (<tr onClick={ () =>this.editRow(banner)} key={index}><td>{banner.id}</td><td>{banner.name}</td>
-                                <td><MediaBox src={image} caption={banner.filename} width="70"/></td><td>{banner.status_label}</td>
+                                <td><MediaBox src={banner.src} caption={banner.filename} width="70"/></td><td>{banner.status_label}</td>
                                 <td><Link to={{  pathname:'/admin/banner/edit/'+banner.id , item : banner  }} >Edit</Link></td></tr>)
                         }) 
                         }

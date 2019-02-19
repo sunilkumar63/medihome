@@ -21,8 +21,12 @@ module.exports = {
     })
     } ,
     getBanners : async (data) =>{
+        var front = data.front;
         return new Promise(async  (resolve,reject) => {
-        bannerModel.find({status : true}).then( result => resolve(result) ).catch(error => reject(error))        
+            if(front)
+                bannerModel.find({status : true}).select('filename').then( result => resolve(result) ).catch(error => reject(error))        
+            else
+                bannerModel.find().then( result => resolve(result) ).catch(error => reject(error))        
     })
     },
     getBanner : async (id) =>{

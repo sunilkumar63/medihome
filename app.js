@@ -113,7 +113,7 @@ global.log = function(data) {
     console.log(data);
 }
 let presc_path =  path.join(__dirname,'client/src/images/presc/');
-let banner_path =  path.join(__dirname,'client/src/images/banner/')
+let banner_path =  public_dir+"/media/banner/"
 !fs.existsSync(presc_path) && fs.mkdirSync(presc_path);
 !fs.existsSync(banner_path) && fs.mkdirSync(banner_path);
 

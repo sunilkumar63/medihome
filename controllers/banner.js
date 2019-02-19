@@ -1,12 +1,11 @@
 let router = require('express').Router();
 var banner_api  =  require('../models/api/banner') 
 let save = '/admin/banner/save'
-let fetchAll = '/api/banners'
+let fetchAll = '/api/banners/:front?'
 let edit = '/api/banner/:id'
 
 router.post(save , async (req, res) =>{
     var data = req.body;
-    // if(!data.id) 
     if(!data) return res.status(500).json({error :"Not valid Data"});
         
      //SAVE IMAGE  LOCALLY
@@ -41,7 +40,7 @@ router.delete(edit , (req, res) =>{
     res.send(banner_api.removeBanner(id))
 })
 router.get(fetchAll , async (req, res) =>{
-    var banners  = await banner_api.getBanners();
+    var banners  = await banner_api.getBanners(req.params);
     res.send(banners)
 })
 

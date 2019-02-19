@@ -98,7 +98,7 @@ delete = () =>{
                     <Row>
                         <Input l={12} s={6}  type='file' label="Choose file" defaultValue ={banner && banner.filename }  placeholder=""  name="image" ref={this.ImageFile} required= {banner ? "" : "required"} > </Input>
                         { banner &&
-                        <MediaBox src={ require(`../../images/banner/${banner.filename}`)  } width="100"></MediaBox >
+                        <MediaBox src={ banner.src} width="150"></MediaBox >
                         }
                     </Row>
                     <Row>
