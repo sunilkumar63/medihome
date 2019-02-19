@@ -26,8 +26,8 @@ class Pres extends React.Component {
                 <table className="table"><tbody>
                     <tr><th>#</th><th>Name</th><th>Image</th><th>Message</th><th>Date</th></tr>
                     { presc && presc.map( (item,index) => {
-                        const  image=  require(`./images/presc/${item.file}`)
-                        return (<tr key={index}><td>{item.id}</td><td>{item.name}</td><td><MediaBox src={image} caption={item.name} width="70"/></td><td>{item.message}</td><td>{item.creation_date}</td></tr>)
+                        //const  image=  require(`./images/presc/${item.file}`)
+                        return (<tr key={index}><td>{item.id}</td><td>{item.name}</td><td>{item.message}</td><td>{item.creation_date}</td></tr>)
                      })
                    }
                    </tbody>

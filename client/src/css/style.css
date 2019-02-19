@@ -9,6 +9,11 @@ body{
 img{
 /* max-width: 100%; */
 }
+.toast{
+  background: mediumseagreen !important;
+  font-size: 1.5rem;
+  padding: 10px 30px;
+}
 .main-container ,.front-wrapper{
   margin: 0 auto;
   min-height: 100%;
@@ -368,4 +373,10 @@ cursor: hand;
 }
 button.back:after{
   margin-bottom : 5px;
+}
+
+@media only screen and (min-width: 993px) {
+#toast-container {
+  right: 45%;
+}
 }

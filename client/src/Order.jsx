@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Icon, MediaBox} from 'react-materialize';
 import {Link} from 'react-router-dom';
-
 require('./css/customer.css');
 require('./css/lib.css');
 
@@ -19,7 +18,6 @@ class Order extends React.Component {
     
   render() { 
     const {orders} = this.props;
-    // console.log(orders)
     return (
             <div className="view pres-grid">
             {/* <div className="title">Order History</div> */}
@@ -29,11 +27,20 @@ class Order extends React.Component {
             { orders.length > 0 ?
                 <table className="table"><tbody>
                     <tr><th>#</th><th>Medicines</th><th>Uploaded Prescription</th><th>Grand Total</th><th>Ordered On</th></tr>
-                    { orders.map( (item,index) => {                        
-                       const  image=  require(`./images/presc/${item.prescription.file}`)
-                    return (<tr key={index}><td>{item.id}</td><td>{item.items}</td>
-                    <td><MediaBox src={image} caption={item.prescription.file} width="70"/></td>
-                    <td>{item.grand_total_currency}</td><td>{item.purchased_date}</td></tr>)
+                    { orders.map( (item,index) => {             
+                    var path = `./images/presc/${item.prescription.file}`
+                    try {                  
+                    // var  image=  require(`./images/presc/${item.prescription.file}`)                       
+                    return ( 
+                    <tr key={index}><td>{item.id}</td><td>{item.items}</td>
+                    {/* <td><MediaBox src={image} caption={item.prescription.file} width="70"/></td> */}
+                    <td>{item.grand_total_currency}</td><td>{item.purchased_date}</td></tr>
+                         )               
+                    }
+                     catch(e){
+                        throw e;
+                    }
+                    
                      })
                    }
                    </tbody>

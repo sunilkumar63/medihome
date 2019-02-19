@@ -67,6 +67,7 @@ const Routes = () => (
                      <AdminLayout  exact path="/admin/system/config" component={Config} />                     
                      <AdminLayout  exact path="/admin/banner/grid" component={banner_grid} />                     
                      <AdminLayout  exact path="/admin/banner/new" component={banner_new} />         
+                     <AdminLayout  exact path="/admin/banner/edit/:id" component={banner_new} />         
             </div>
             
     </Router>
