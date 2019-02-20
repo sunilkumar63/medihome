@@ -25,7 +25,7 @@ render() {
             <ul className="inline menu">
                 <MenuItem title="Home" submenu ={ this.HomeMenu } route="/" />
                 <MenuItem title="Services" submenu ={ this.ServiceMenu }  route="#"/>
-                <MenuItem title="About Us" submenu ={ this.AboutUsMenu }  route="#" />
+                <MenuItem title="About Us"   route="/about-us" />
             </ul>
         </nav>       
        

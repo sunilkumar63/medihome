@@ -12,6 +12,7 @@ import Myaccount from './Myaccount.jsx'
 import Prescription from './Pres.jsx'  
 import Success from './Success.jsx'  
 import noroute from './404.jsx'  
+import About from './Page.jsx'  
 
 import admin from './admin/Routes'
 import admin_login from './admin/Login.jsx'
@@ -50,7 +51,8 @@ const Routes = () => (
     <Router history={customHistory}>
      
         <div className="main-container" >
-                    <DefaultLayout exact path='/' component={Home} />
+                    <DefaultLayout exact path='/:page_id?' component={Home} />
+                    <DefaultLayout exact path='/about-us' component={About} />
                     <DefaultLayout exact path='/customer/login' component={Login} />
                     <DefaultLayout exact path='/customer/register' component={Register} />
                     <DefaultLayout exact path='/upload' component={Upload} />
