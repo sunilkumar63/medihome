@@ -71,8 +71,9 @@ handleOrderNav = () => {
                             </a>
                             <ul className="treeview-menu" style ={style}>
                                 <li><Link to="/admin/banner/grid"><i className="material-icons md-24">color_lens</i>Banner</Link></li>
-                            </ul>                        
-                         </li>
+                                <li><Link to="/admin/pages"><i className="material-icons md-24">pages</i>Pages</Link></li>
+                            </ul>      
+                         </li> 
                         <li className="treeview">
                             <a href="#">
                             <i className="material-icons md-36">settings</i>

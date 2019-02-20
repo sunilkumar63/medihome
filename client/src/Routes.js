@@ -25,7 +25,8 @@ import Shipment from './admin/order/Shipment';
 import Config from './admin/system/Config.jsx';
 import banner_grid from './admin/banner/Grid';
 import banner_new from './admin/banner/Form';
-// import banner_edit from './admin/banner/Edit';
+import pages_grid from './admin/pages/Grid';
+import pages_new from './admin/pages/Form'
 
 const customHistory = createBrowserHistory();
 
@@ -67,7 +68,10 @@ const Routes = () => (
                      <AdminLayout  exact path="/admin/system/config" component={Config} />                     
                      <AdminLayout  exact path="/admin/banner/grid" component={banner_grid} />                     
                      <AdminLayout  exact path="/admin/banner/new" component={banner_new} />         
-                     <AdminLayout  exact path="/admin/banner/edit/:id" component={banner_new} />         
+                     <AdminLayout  exact path="/admin/banner/edit/:id" component={banner_new} />    
+                     <AdminLayout  exact path="/admin/pages/" component={pages_grid} />                     
+                     <AdminLayout  exact path="/admin/page/new" component={pages_new} />         
+                     <AdminLayout  exact path="/admin/page/edit/:id" component={pages_new} />      
             </div>
             
     </Router>

@@ -92,3 +92,8 @@ min-height: 20px
     display: table;
     clear: both;
 }
+.page-editor {
+background: #ffff;
+padding: 10px;
+/* min-height: 200px; */
+}

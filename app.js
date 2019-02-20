@@ -64,6 +64,7 @@ app.use('/', ctrl_order);
 app.use('/', ctrl_email);
 app.use('/', ctrl_admin);
 app.use('/', banner_admin);
+app.use('/', require('./controllers/pages.js'));
 
 
 //production mode

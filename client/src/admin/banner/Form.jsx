@@ -93,6 +93,9 @@ delete = () =>{
                  <Input type="hidden" name="id" value={banner.id} ></Input>
                 }
                     <Row>
+                          <Input name='status' type='switch' value="true" />
+                    </Row>
+                    <Row>
                         <Input s={6} l={12} label="Name" defaultValue = { banner && banner.name} name ="name" validate><Icon>account_circle</Icon></Input>
                     </Row>
                     <Row>
