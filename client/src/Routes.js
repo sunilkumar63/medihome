@@ -1,7 +1,6 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import Home from './Home.jsx'
-import axios from 'axios'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
 import createBrowserHistory from 'history/createBrowserHistory';
@@ -12,6 +11,7 @@ import Myaccount from './Myaccount.jsx'
 import Prescription from './Pres.jsx'  
 import Success from './Success.jsx'  
 import noroute from './404.jsx'  
+import CMS from './Cms.jsx'  
 
 import admin from './admin/Routes'
 import admin_login from './admin/Login.jsx'
@@ -30,35 +30,22 @@ import pages_new from './admin/pages/Form'
 
 const customHistory = createBrowserHistory();
 
-const authUser = () =>{
-    axios.get('/api/customer/auth')
-        .then(result =>result.data)
-        .then( data => {
-            if(data !== false){
-                localStorage.setItem("customer", JSON.stringify(data))
-                localStorage.setItem("is_logged",true)
-        }
-        else {
-            localStorage.setItem("is_logged",false)
-            localStorage.setItem("customer",null)
-        }
-    })
-}
-authUser();
+
 
 const Routes = () => (
     <Router history={customHistory}>
-     
+    <>
+         <Route exact path="/admin/login" component={admin_login} />
         <div className="main-container" >
                     <DefaultLayout exact path='/' component={Home} />
+                    <DefaultLayout exact path='/page/:page_id' component={CMS} />
                     <DefaultLayout exact path='/customer/login' component={Login} />
                     <DefaultLayout exact path='/customer/register' component={Register} />
                     <DefaultLayout exact path='/upload' component={Upload} />
                     <DefaultLayout exact path='/customer/account' component={Myaccount} />
                     <DefaultLayout exact path='/customer/prescription' component={Prescription} />
                     <DefaultLayout exact path='/order/success' component={Success} />                    
-                     <AdminLayout exact path="/admin/" component={admin_dash} />
-                     <AdminLayout exact path="/admin/login" component={admin_login} />
+                     <AdminLayout exact path="/admin/" component={admin_dash} />                     
                      <AdminLayout  exact path="/admin/customers/grid" component={cust_grid} />
                      <AdminLayout  exact path="/admin/customer/:id?" component={cust_edit} />
                      <AdminLayout  exact path="/admin/orders/grid" component={order_grid} />
@@ -73,7 +60,7 @@ const Routes = () => (
                      <AdminLayout  exact path="/admin/page/new" component={pages_new} />         
                      <AdminLayout  exact path="/admin/page/edit/:id" component={pages_new} />      
             </div>
-            
+            </>
     </Router>
 )
 

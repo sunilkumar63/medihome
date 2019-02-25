@@ -79,10 +79,10 @@ header > div {
 .view{
   position: relative;
 }
-.view .page {
+.view .page ,.page{
   background: #ffff;
   padding: 10px;
-  width: 80%;
+  width: 98%;
   margin: 0 auto;
   color: black;
   border-radius: 15px;
@@ -102,13 +102,16 @@ header > div {
       padding-top: 5px;
 }
 
-.view  > .title {
+.view  > .title ,.page  > .title{
   text-transform: capitalize;
   text-align: center;
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 10px;
   border-bottom: 1px solid #ffff;
+}
+.breadcrumb{
+  margin-bottom: 0px;
 }
 .view.myaccount .page {
   width : 90%;

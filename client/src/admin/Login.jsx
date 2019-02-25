@@ -1,8 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
-// import axios from 'axios';
-import {Link} from 'react-router-dom';
-import { Redirect } from 'react-router'
+import {Redirect} from 'react-router-dom';
+import { Button, Icon, Card} from 'react-materialize';
 import {
     Form,
     Input,
@@ -13,15 +12,27 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          isLoggedIn: false,
+            isAdminLoggedIn: false,
           error : false
         }
+        document.title = "MadiHome - Admin Login"
       }
     componentDidMount(){
+        fetch('/api/admin/auth')
+            .then(result =>result.data)
+            .then( data => {
+                if(data !== false){
+               this.props.history.push("/admin")
+            }
+        })
+
         $('.footer').hide();
     }
+
 submit = (data) =>{
-    fetch('/api/customer/login', {
+    var props = this.props;
+    console.log(this.props)
+    fetch('/api/admin/login', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -29,53 +40,62 @@ submit = (data) =>{
           }
       })
      .then( rs => rs.json())
-     .then(result =>{ 
+     .then(result =>{  
          if(!result ) {
-             this.setState({ isLoggedIn : false, error : true  }); 
+             window.Materialize.toast('Incorrect Credentials', 5000) 
+             this.setState({ isAdminLoggedIn : false, error : true  }); 
          }
         else{
-            this.setState({ isLoggedIn : true, error : false  }) 
-            localStorage.setItem('customer', JSON.stringify(result));
-            localStorage.setItem('is_logged', true) 
-            this.props.history.push("/customer/account");
+            window.Materialize.toast('Great!!, Now,You have Admin Powers ', 5000) 
+            // this.setState({ isAdminLoggedIn : true, error : false  }) 
+            // localStorage.setItem("admin_id", result.id)
+            // localStorage.setItem("isAuthenticated",true)
+            this.props.history.push("/admin");
         }
      })
 } 
 render() {
-    const {  error } = this.state;
+    const {  error ,isAdminLoggedIn} = this.state;
+    const isAuth = localStorage.getItem("isAuthenticated")
+    var showClass = error ? "show" : "hide";
+    console.log(error)
     return (   
-        <div className="view content-wrapper">            
-            <div className="box content form">
-                <div className="title">Admin Login</div>
-                { error &&
-                    <div className="messages error text-center">
-                        <div className ="message">Incorect Login Credentials</div>
+        <div className="view admin-plain">          
+            {/* if(isAuth) <Redirect to ="/admin"></Redirect>  */}
+            <div className="page">                        
+            <div className="messages error text-center">
+                <div className ="message">MediHome - Admin Panel</div>
+             </div>
+             <div className="text-center">
+                <h5 className ="content">Hey ! Good to see you</h5>
+             </div>
+                <div className="box content form">
+                
+                    <div className="title text-center">Admin Login</div>
+                    {
+                            // <div className={"messages error text-center "+showClass}>
+                            //     <div className ="message">Incorect Login Credentials</div>
+                            // </div>
+                    }
+                    <Form onSubmit={this.submit.bind(this)}>
+                    <Input
+                            name="mobile_no"                        
+                            placeholder="Mobile No"
+                            value = "123456789"
+                            validation={ValidationTypes.Number}
+                            missingMessage="This field is required."
+                            isRequired
+                            />
+                    <Input
+                            name="password"                        
+                            placeholder="Password"
+                            missingMessage="This field is required."
+                            autoComplete =  "off"
+                            isRequired
+                            />                              
+                    </Form>
                     </div>
-                }
-                <Form onSubmit={this.submit.bind(this)}>
-                <Input
-                        name="mobile_no"                        
-                        placeholder="Mobile No"
-                        value = "11112222"
-                        validation={ValidationTypes.Number}
-                        missingMessage="This field is required."
-                        isRequired
-                        />
-                <Input
-                        name="password"                        
-                        placeholder="Password"
-                        missingMessage="This field is required."
-                        autoComplete =  "off"
-                        isRequired
-                        />                              
-                </Form>
-                <Link to="/register"><button className="no-margin"><i className="fa fa-email"></i>Sign Up</button> </Link>
-                <div className="social"> <span>or sign up with social media</span></div>
-                <div className="buttons">
-                    <button className="facebook"><i className="fa fa-facebook"></i>Facebook</button>
-                    <button className="google"><i className="fa fa-google-plus"></i>Google</button>
-                </div>
-                </div>
+            </div>
         </div>
     )
 }

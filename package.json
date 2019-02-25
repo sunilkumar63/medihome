@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "set NODE_ENV='production' && node ./bin/www",
     "nodemon": "nodemon -e ejs,js ",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "dev": "concurrently \"nodemon -e ejs,js -\" \"cd client && npm start\""

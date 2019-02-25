@@ -36,11 +36,11 @@ editRow=(item) =>{
                 { data && data.length > 0 ?
                     <table className="table-hover table">
                     <thead>
-                        <tr><td>#</td><td>Name</td><td>Status</td><td>Actions</td></tr>
+                        <tr><td>#</td><td>Name</td><td>Url Key</td><td>Status</td><td>Actions</td></tr>
                     </thead>
                     <tbody>
                         { data.map( (item,index) => {
-                            return (<tr onClick={ () =>this.editRow(item)} key={index}><td>{item.id}</td><td>{item.name}</td><td>{item.status_label}</td>
+                            return (<tr onClick={ () =>this.editRow(item)} key={index}><td>{item.id}</td><td>{item.name}</td><td>{item.url_key}</td><td>{item.status_label}</td>
                                 <td><Link to={{  pathname:'/admin/page/edit/'+item.id , item : item  }} >Edit</Link></td></tr>)
                         }) 
                         }

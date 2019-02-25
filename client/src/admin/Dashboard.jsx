@@ -1,15 +1,14 @@
 import React from 'react';
+import withLoader  from '../components/LoaderHoc'
 import { Button, Icon, Card} from 'react-materialize';
 
 class Dashboard extends React.Component{
     state = {
         recent_orders : null
     }
-    componentDidMount(){ 
-        fetch('/api/orders/recent').then(res => res.json()). then(orders => this.setState({recent_orders : orders }) ).catch(err => console.log(err))   
-    }
+
     render(){
-        const {recent_orders} = this.state;
+        const {recent_orders} = this.props;
         return(
             recent_orders &&
             <div className="view tab-view content-wrapper"> 
@@ -37,4 +36,4 @@ class Dashboard extends React.Component{
     }
 }
 
-export default Dashboard;
+export default withLoader('/api/orders/recent','recent_orders')(Dashboard);

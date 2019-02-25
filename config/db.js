@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
-var env = require('../config/config');
-var config = env.config();
-var mongodbUri = config.database;
+var env = require('./config');
+var config = env.config()
+var mongodbUri = "mongodb://nick:nitish93@ds211635.mlab.com:11635/medihome-dev";//config.database;
 //mongodb options
 var options = {
   socketTimeoutMS: 0,

@@ -100,14 +100,15 @@ app.use(function(err, req, res, next) {
 //     });
 // } else {
         console.log(`Worker ${process.pid} started`);
+        console.log(`Running on port  ==> ${app.get("port") }`);
         app.get('/cluster', (req, res) => {
             let worker = cluster.worker.id;
-            res.send(`Running on worker with id ==> ${worker}`);
+            res.send(`Running on port  ==> ${app.get("port") }`);
         });
         var server = http.createServer(app)
         reload(app);
         server.listen(app.get('port') , function(){
-            console.log('Running on port ' +app.get('port'));
+            // console.log('Running on port ' +app.get('port'));
         }) 
 // } 
 global.log = function(data) {

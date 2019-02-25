@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
+import withLoader  from '../../components/LoaderHoc'
 import { Button, Icon, Card, Row, Col,MediaBox } from 'react-materialize';
 class Grid extends React.Component{
 
@@ -9,18 +10,11 @@ class Grid extends React.Component{
         document.title = "Admin - Banner"
     }
 
-    componentDidMount(){
-        //  window.Materialize.toast('Banner Saved', 100000) 
-        fetch('/api/banners')
-        .then(res => res.json())
-        .then(data => this.setState({data : data }))
-        .catch(err => console.error(err))
-}
 editRow=(item) =>{
     this.props.history.push({ pathname : '/admin/banner/edit/'+item.id, item : item })
 }
     render(){
-        const {data} = this.state;
+        const {data} = this.props;
         return(
             <div className="view content-wrapper">              
                 <div className="page-head cleafix">
@@ -57,4 +51,4 @@ editRow=(item) =>{
     }
 }
 
-export default Grid;
+export default withLoader('/api/banners','data')(Grid);

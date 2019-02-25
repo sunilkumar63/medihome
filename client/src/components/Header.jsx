@@ -8,7 +8,21 @@ class Header extends Component {
         menuShow : false,
         logout : false
     }
-
+     authUser = () =>{
+        axios.get('/api/customer/auth')
+            .then(result =>result.data)
+            .then( data => {
+                if(data !== false){
+                    localStorage.setItem("customer", JSON.stringify(data))
+                    localStorage.setItem("is_logged",true)
+            }
+            else {
+                localStorage.setItem("is_logged",false)
+                localStorage.setItem("customer",null)
+            }
+        })
+    }
+    
     toggleMenu= () => this.setState({ menuShow: !this.state.menuShow });
     logout = () =>{
         axios.get('/api/customer/logout')
@@ -24,6 +38,7 @@ class Header extends Component {
         return false;
     }
     render() {
+        this.authUser.bind(this)
         const {logout} = this.state;
         const menuClass = `menu${this.state.menuShow ? " show" : " hide" }`;
         //   var menuClass = menuShow ? "" : "hide";

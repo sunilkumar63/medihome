@@ -2,7 +2,6 @@ var Model =  require('../pages');
 
 module.exports = {
     save : async (data) =>{
-        // console.log(data); return ;
         return new Promise(async  (resolve,reject) => {
         var item = await new Model(data).save()
         if(item) resolve(true)
@@ -37,6 +36,14 @@ module.exports = {
     fetch : async (id) =>{
         return new Promise(async  (resolve,reject) => {
         var data =  await Model.findOne({id : id});
+        if(data){
+            resolve(data)
+        }
+    })
+    },
+    getByUrlKey : async (url_key) =>{
+        return new Promise(async  (resolve,reject) => {
+        var data =  await Model.findOne({url_key : url_key , status : true});
         if(data){
             resolve(data)
         }

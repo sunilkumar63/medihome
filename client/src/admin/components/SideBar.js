@@ -8,7 +8,8 @@ export default class SideBar extends Component {
         this.handleOrderNav = this.handleOrderNav.bind(this)
         this.state = {
             show : false,
-            showOrder : false
+            showOrder : false,
+            showContent : false
         }
     }
     
@@ -21,12 +22,16 @@ export default class SideBar extends Component {
 handleOrderNav = () => {
     this.setState({ showOrder : !this.state.showOrder})
 }
+handleContentNav = () => {
+    this.setState({ showContent : !this.state.showContent})
+}
 
     render(){
-        var showCls,openCls,order_showCls,order_openCls = '';
-        const {show,showOrder} = this.state;
+        var showCls,openCls,order_showCls,content_showCls,order_openCls,content_openCls  = '';
+        const {show,showOrder,showContent} = this.state;
         if(show)    showCls = "show" ;   openCls = "menu-open"
         if(showOrder)    order_showCls = "show" ;   order_openCls = "menu-open"
+        if(showContent)    content_showCls = "show" ;   content_openCls = "menu-open"
         const style = {
             marginLeft : "25px"
         }
@@ -58,10 +63,10 @@ handleOrderNav = () => {
                             </Link>
                             <ul className={"treeview-menu "+order_showCls} style ={style}>
                                 <li><Link to="/admin/orders/grid"><i className="material-icons">toys</i>Manage Orders</Link></li>
-                                <li><Link to="pages/layout/boxed.html"><i className="material-icons">toys</i>Invoices</Link></li>
+                                <li><Link to="/"><i className="material-icons">toys</i>Invoices</Link></li>
                             </ul>                            
                         </li>
-                        <li className="treeview">
+                        <li className={"treeview "+ content_openCls} onClick={this.handleContentNav}>
                             <a href="#">
                             <i className="material-icons md-36">description</i>
                                 <span>Content</span>
@@ -69,7 +74,7 @@ handleOrderNav = () => {
                                 <i className="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
-                            <ul className="treeview-menu" style ={style}>
+                            <ul className={"treeview-menu "+content_showCls} style ={style}>
                                 <li><Link to="/admin/banner/grid"><i className="material-icons md-24">color_lens</i>Banner</Link></li>
                                 <li><Link to="/admin/pages"><i className="material-icons md-24">pages</i>Pages</Link></li>
                             </ul>      

@@ -62,7 +62,7 @@ render() {
     const  {customer} =  this.state;
     return (   
         this.state.loader ? <Loader /> : customer &&
-        <div className="view myaccount">
+        <div className="">
             <div className="page">
             <div className="title text-center"><span>{this.state.title}</span></div>
             <Tab.Container className="tab" defaultActiveKey="first" id="mytab">

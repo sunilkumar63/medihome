@@ -112,7 +112,7 @@ delete = () =>{
                     }
                     </div>
                     <div className="control-wrapper">
-                    <Button waves='light' className="red" onClick={() => this.props.history.goBack()}>Back<Icon left>replay</Icon></Button>
+                    <Button waves='default' className="red" onClick={() => this.props.history.goBack()}>Back<Icon left>replay</Icon></Button>
                     { item &&
                     <Button waves='teal' className ="blue" onClick={ this.delete }>Delete<Icon  left>remove</Icon></Button>  
                     }

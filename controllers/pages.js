@@ -2,6 +2,7 @@ let router = require('express').Router();
 var pages_api  =  require('../models/api/pages') 
 let save = '/admin/page/save'
 let fetchAll = '/api/pages/:front?'
+let fetchOne = '/api/pages/:url_key'
 let edit = '/api/page/:id'
 
 router.post(save , async (req, res) =>{
@@ -33,6 +34,12 @@ router.get(edit ,  async(req, res) =>{
         var data = await pages_api.fetch(id)
         if(data)
         res.json(data)
+})
+router.get(fetchOne ,  async(req, res) =>{
+    var id = req.params.url_key; 
+    var data = await pages_api.getByUrlKey(id)
+    if(data)
+    res.json(data)
 })
 router.delete(edit , (req, res) =>{
     var id = req.params.id; 

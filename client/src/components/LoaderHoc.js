@@ -13,6 +13,9 @@ const LoaderH =  (api_url, prop_name) => (WrappedComponent) => {
         var api = null;
         let param_id =  this.props.match.params.id;
         param_id ? api = api_url+"/"+param_id+"/all"  : api =  api_url
+        let page_id = this.props.match.params.page_id;
+        page_id ? api = api_url+"/"+page_id  : api =  api_url
+        
         fetch(api)
         .then(res => res.json())
         .then(items => this.setState({items }))

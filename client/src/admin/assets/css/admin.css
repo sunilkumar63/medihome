@@ -13,6 +13,16 @@
 .admin-wrapper a{
     color: black;
 }
+.admin-plain .page{
+    min-height: 100vh;
+}
+.admin-plain .page .box{
+    background: #ffffff;
+    top: 22%;
+}
+.admin-plain{
+    background: #F6FAFB !important;
+}
 .main-sidebar{
     /* background: #8dca6138; */
     /* margin-top: 10px; */

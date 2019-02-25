@@ -10,7 +10,6 @@ class Menu extends React.Component{
  ]
 
  AboutUsMenu = [
-    {title : "Introduction" , route: "/intro"} 
  ]
 
  handleMenuHover = () =>{
@@ -24,8 +23,8 @@ render() {
         <nav>
             <ul className="inline menu">
                 <MenuItem title="Home" submenu ={ this.HomeMenu } route="/" />
-                <MenuItem title="Services" submenu ={ this.ServiceMenu }  route="#"/>
-                <MenuItem title="About Us" submenu ={ this.AboutUsMenu }  route="#" />
+                <MenuItem title="Services" submenu ={ this.ServiceMenu }  route="/page/test"/>
+                <MenuItem title="About Us" submenu ={ this.AboutUsMenu }  route="/page/about-us" />
             </ul>
         </nav>       
        

@@ -2,7 +2,8 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import Loader from '../components/Loader'
+import withLoader  from '../components/LoaderHoc'
 class SimpleSlider extends React.Component {
   state = {banners : null  }
 
@@ -26,10 +27,11 @@ class SimpleSlider extends React.Component {
       adaptiveHeight : false
     };
     return (
+      banners && banners.length <= 0 ? <Loader /> :
         <div className="">
             <Slider {...settings}>
             {
-              banners && banners.map( banner =>{
+             banners &&  banners.map( banner =>{
                 return (
                         <div><img src={`/media/banner/${banner.filename} `} width="100%" alt="dfd" style={{"maxHeight" : "400px"}}/>  </div>
                       )
@@ -41,3 +43,4 @@ class SimpleSlider extends React.Component {
   }
 }
 export default SimpleSlider;
+// export default withLoader('/api/banners/list' , 'banners')(SimpleSlider );

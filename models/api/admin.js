@@ -1,4 +1,5 @@
 var configModel  = require('../configuration')
+var Admin =  require('../admin');
 
 module.exports.saveConfig =  (data) =>{
     return new Promise( async  (resolve,reject) => {
@@ -11,7 +12,6 @@ module.exports.saveConfig =  (data) =>{
            if(rs )  resolve(true)
            else reject(false)
         })
-        // configModel.insertMany(save_obj).then( docs => resolve(docs)).catch( err => { console.log(err) ; reject(err) })
 }
 
 module.exports.getAllConfig =() => {
@@ -20,6 +20,23 @@ module.exports.getAllConfig =() => {
     })
 }
 
-module.exports._getConfigValue = (section_id,field_id)  =>{
+module.exports.authLogin =  (data) =>{
+    return new Promise( (resolve , reject) =>{
+    Admin.findOne({ mobile_no : data.mobile_no,password: data.password}).then( res =>{          
+            if(res) { resolve(res)   }            
+            else { reject(false) }
+         })
+         .catch(err => {console.log(err) ;reject(false) })
+    })
+    },
+    
+module.exports.getInfo =  async  (id) => {
+        return new Promise( async (resolve , reject) =>{
+          var customers =   await Admin.findOne({ id : id});
+            if(customers) resolve(customers)
+            else reject({error : true , message : 'invalid Admin ID'})
+        })
+},
 
+module.exports._getConfigValue = (section_id,field_id)  =>{
 }

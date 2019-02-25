@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
+import withLoader  from '../../components/LoaderHoc'
 import { Button, Icon, Card, Row, Col } from 'react-materialize';
 class Grid extends React.Component{
 
@@ -8,17 +9,11 @@ class Grid extends React.Component{
         this.state = {customer : null}
     }
 
-    componentDidMount(){
-        fetch('/api/customers')
-        .then(res => res.json())
-        .then(customers => this.setState({customers : customers }))
-        .catch(err => console.error(err))
-}
 editRow=(order_id) =>{
     this.props.history.push('/admin/customer/'+order_id)
 }
     render(){
-        const {customers} = this.state;
+        const {customers} = this.props;
         return(
             <div className="view content-wrapper">              
                 <div className="page-head cleafix">
@@ -52,4 +47,4 @@ editRow=(order_id) =>{
     }
 }
 
-export default Grid;
+export default withLoader('/api/customers','customers')(Grid);
