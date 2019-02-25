@@ -37,8 +37,13 @@ const Routes = () => (
     <>
          <Route exact path="/admin/login" component={admin_login} />
         <div className="main-container" >
+<<<<<<< HEAD
                     <DefaultLayout exact path='/' component={Home} />
                     <DefaultLayout exact path='/page/:page_id' component={CMS} />
+=======
+                    <DefaultLayout exact path='/:page_id?' component={Home} />
+                    <DefaultLayout exact path='/about-us' component={About} />
+>>>>>>> b7986adee166637dd73defdf3b289e5280d6e0ce
                     <DefaultLayout exact path='/customer/login' component={Login} />
                     <DefaultLayout exact path='/customer/register' component={Register} />
                     <DefaultLayout exact path='/upload' component={Upload} />
