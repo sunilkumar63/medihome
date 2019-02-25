@@ -9,11 +9,10 @@ import '../../css/customer.css';
 import '../../css/lib.css';
 
 const AdminLayout = ({component: Component, ...rest}) => {
-
     return (
           <Route {...rest} render={matchProps => (
             <div className="admin-wrapper">
-                <Header />
+                <Header {...matchProps} />
                 <Sidebar />
                 <Component {...matchProps} />          
             </div>

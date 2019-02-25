@@ -12,39 +12,31 @@ import axios from 'axios';
         this.state = {
             isAuthenticated : false
         }
-        this.authAdmin =  this.authAdmin.bind(this);
+        // this.authAdmin =  this.authAdmin.bind(this);
         this.logout =  this.logout.bind(this);
  }
  
  componentDidMount(){
     var isAuth = localStorage.getItem("isAuthenticated");
-    if(!isAuth)    this.authAdmin();
- }
-    authAdmin =  () =>{
-        var props = this.props;
-        console.log("auth Props ",props)
-        axios.get('/api/admin/auth')
-            .then(result =>result.data)
-            .then( data => {
-                if(data !== false){
-                    localStorage.setItem("admin_id", data.id)
-                    localStorage.setItem("isAuthenticated",true)
+    fetch('/api/admin/auth')
+        .then(res =>res.json())
+        .then( data => {
+            if(!data || !isAuth){
+                 this.props.history.push("/admin/login")
+            }else{
+                localStorage.setItem("admin_id", data.id)
+                localStorage.setItem("isAuthenticated",true)
             }
-            else {
-                localStorage.setItem("isAuthenticated",false)
-                localStorage.setItem("admin_id",null)
-                window.Materialize.toast('Hey,Please Login In', 5000) ;
-                props.history.push('/admin/login')
-            }
-        })
-    }
+    })
+}
+
     logout = () => {
         var props = this.props;
         fetch('/api/admin/logout').then(res => res.json()).then(result =>{
-          localStorage.setItem("isAuthenticated",false)
+          localStorage.setItem("isAuthenticated",null)
           localStorage.setItem("admin_id",null)
           window.Materialize.toast('Hey,Logged Out', 5000) ;
-          this.setState({isAuthenticated : true})
+        //   this.setState({isAuthenticated : false})
           props.history.push('/admin/login')
         })
     }
@@ -53,8 +45,8 @@ import axios from 'axios';
                 marginLeft : 0,
                 background: "none"
         }
+        const {isAuthenticated} = this.state;
         var isAuth = localStorage.getItem("isAuthenticated")
-        console.log("HeaderAuth " , isAuth)
         return (
             <header className="main-header header"><img src={logo} width="50px"></img>
               {/* if(!isAuth) <Redirect to ="/admin/login"></Redirect>  */}
@@ -68,7 +60,7 @@ import axios from 'axios';
                     </a>
                     <div className="navbar-custom-menu">
                         <ul className="nav navbar-nav">
-                        <li><Button onClick= {this.logout}  floating large className='' waves='light' icon='logout' >Logout</Button> </li>
+                        <li><Button onClick= {() =>this.logout() }  floating large className='' waves='light' icon='logout' >Logout</Button> </li>
                             <li className="dropdown messages-menu">
                                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                                     <i className="fa fa-envelope-o"></i>

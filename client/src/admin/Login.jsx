@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import {Redirect} from 'react-router-dom';
+import Header from './components/Header'
 import { Button, Icon, Card} from 'react-materialize';
 import {
     Form,
@@ -18,15 +19,8 @@ class Login extends React.Component {
         document.title = "MadiHome - Admin Login"
       }
     componentDidMount(){
-        fetch('/api/admin/auth')
-            .then(result =>result.data)
-            .then( data => {
-                if(data !== false){
-               this.props.history.push("/admin")
-            }
-        })
-
-        $('.footer').hide();
+        const isAuth = localStorage.getItem("isAuthenticated")
+        // if(isAuth) this.props.history.push("/admin") 
     }
 
 submit = (data) =>{
@@ -48,9 +42,9 @@ submit = (data) =>{
         else{
             window.Materialize.toast('Great!!, Now,You have Admin Powers ', 5000) 
             // this.setState({ isAdminLoggedIn : true, error : false  }) 
-            // localStorage.setItem("admin_id", result.id)
-            // localStorage.setItem("isAuthenticated",true)
-            this.props.history.push("/admin");
+            localStorage.setItem("admin_id", result.id)
+            localStorage.setItem("isAuthenticated",true)
+            this.props.history.push({pathname : "/admin"  ,state  : { "fromLogin" : true }});
         }
      })
 } 
@@ -61,7 +55,6 @@ render() {
     console.log(error)
     return (   
         <div className="view admin-plain">          
-            {/* if(isAuth) <Redirect to ="/admin"></Redirect>  */}
             <div className="page">                        
             <div className="messages error text-center">
                 <div className ="message">MediHome - Admin Panel</div>

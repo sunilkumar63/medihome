@@ -20,9 +20,9 @@ class Dashboard extends React.Component{
                 <tBody>
                     <tr><td>#ID</td><td>Customer Name</td><td>Amount</td></tr>
                     {                     
-                        recent_orders.map(order =>{
+                        recent_orders.map((order,index) =>{
                             return (
-                                <tr><td>{order.id}</td><td>{order.customer[0].full_name}</td><td>{order.grand_total_currency}</td></tr>
+                                <tr key={index}><td>{order.id}</td><td>{order.customer[0].full_name}</td><td>{order.grand_total_currency}</td></tr>
                             )
                         })
                     }
