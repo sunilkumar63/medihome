@@ -173,7 +173,7 @@ else{
     })
 
     router.post('/api/customer/update' , async (req, res , next) =>{
-        customer_api.updateAttribute(req.query, result=>{
+        customer_api.updateAttribute(req.body, result=>{
           res.json(result);
         });
       })

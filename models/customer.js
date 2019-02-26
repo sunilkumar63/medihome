@@ -35,6 +35,11 @@ schema
     .get(function () {
        return this.first_name+" "+this.last_name;
     });
+    schema
+    .virtual('status_label')
+    .get(function () {
+       return this.status == 1 ? "Active" : "Inactive"
+    });
     schema.pre('save', function (next) { 
     // store reference
     const user = this;

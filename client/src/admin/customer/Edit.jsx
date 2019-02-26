@@ -26,9 +26,10 @@ handlePageTitle = (event) =>{
     this.setState({title : event.target.textContent})
 }
 updateData = (value) =>{
-    const data = {id : this.props.match.params.id , value : value , attribute : 'status' }
+    const data = {id : this.props.match.params.id , update_data : { "status" : value }}
         updateCustomer(data, (result) =>{
-console.log(result)
+            // window.Materialize.toast('Customer Updated', 3000) 
+            setTimeout(window.location.reload() , 1000)
     }) 
 }
 
@@ -36,13 +37,26 @@ console.log(result)
         const { customer } = this.state;
         return(
             this.state.loader ? <Loader /> : customer &&
-            <div className="view content-wrapper">       
-            <button className ="btn waves-effect red"  onClick={() => this.props.history.goBack()}><i class="material-icons left">replay</i>Back</button>        
-            <button className ="btn waves-effect green"  onClick={() => this.updateData(false) }><i class="material-icons left">block</i>Make Inactive</button>        
-            <button className ="btn waves-effect blue small"  onClick={() => this.props.history.goBack()}><i class="material-icons left">delete</i>Delete</button>        
-
-                <div className="title text-center">My Account</div>
-                <div className="messages error text-center"><i class="material-icons">block</i>This Customer is Not Active.</div>
+            <div className="view content-wrapper">  
+            <div className="page-head clearfix">
+                             <div className="title-wrapper">
+                                <h4 className ="page-title">My Account</h4>                
+                            </div>
+                            
+                            <div className="control-wrapper">     
+                                    <button className ="btn waves-effect red"  onClick={() => this.props.history.goBack()}><i className="material-icons left">replay</i>Back</button>        
+                                { customer.status == 1 &&
+                                    <button className ="btn waves-effect green"  onClick={() => this.updateData(0) }><i className="material-icons left">block</i>Make Inactive</button>        
+                                }
+                                { customer.status == 0 &&
+                                    <button className ="btn waves-effect green"  onClick={() => this.updateData(1) }><i className="material-icons left">play_arrow</i>Make Active</button>        
+                                }
+                                    <button className ="btn waves-effect blue small"  onClick={() => this.props.history.goBack()}><i className="material-icons left">delete</i>Delete</button>        
+                               </div>
+                               </div>
+                   { customer.status == 0 &&
+                    <div className="messages error text-center"><i className="material-icons">block</i>This Customer is Not Active.</div>
+                }
                      <Tab.Container className="tab" defaultActiveKey="first" id="mytab">
                     <Row className="clearfix">
                         <Col sm={2} >

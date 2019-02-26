@@ -34,7 +34,7 @@ editRow=(order_id) =>{
                     </thead>
                     <tbody>
                         { customers.map( (customer,index) => {
-                            return (<tr onClick={ () =>this.editRow(customer.id)} key={index}><td>{customer.id}</td><td>{customer.full_name}</td><td>{customer.email_address}</td><td>{customer.mobile_no}</td><td>Active</td><td><Link to={ "/admin/customer/"+customer.id } >Edit</Link></td></tr>)
+                            return (<tr onClick={ () =>this.editRow(customer.id)} key={index}><td>{customer.id}</td><td>{customer.full_name}</td><td>{customer.email_address}</td><td>{customer.mobile_no}</td><td>{customer.status_label}</td><td><Link to={ "/admin/customer/"+customer.id } >Edit</Link></td></tr>)
                         }) 
                         }
                     </tbody>

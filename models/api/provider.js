@@ -137,9 +137,9 @@ updateAttribute : async (params,cb) =>{
     // console.log(params); return;
     var entity =  'customer';
     var id = parseInt(params.id);
-    var attribute =  params.attribute;
-    var value =  params.value;
-    if(attribute == "status" && entity == "customer") value = parseInt(value)
+    var update_data =  params.update_data;
+    // var value =  params.value;
+    // if(attribute == "status" && entity == "customer") value = parseInt(value)
     var model ,record= null;
     switch(entity){
         case 'customer' :
@@ -147,9 +147,11 @@ updateAttribute : async (params,cb) =>{
         case 'order' :
             model = OrderModel;    
     }
-    if(entity == "customer") model = CustomerModel;
+    // if(entity == "customer") model = CustomerModel;
+    // var custp  = await CustomerModel.findOne({ id : [id]})
+// console.log(custp)
     if(model)
-        record = await model.findOneAndUpdate({ id : [id]}, { [attribute] : value }  , {new: true})
+        record = await CustomerModel.findOneAndUpdate({ id : id}, update_data  , {new: true})
         if(record) return cb(record)
         else return cb(false)
     }
