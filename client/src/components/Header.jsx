@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import Menu from './Menu';
+import { Button, Dropdown,NavItem } from 'react-materialize';
 import logo from '../images/logo.png';
 import {Link , Redirect} from 'react-router-dom';
 import axios from 'axios'
@@ -60,14 +61,25 @@ class Header extends Component {
                 </div>
                 { is_logged === "true" ?
                 <div className="user-info" onMouseEnter={this.toggleMenu.bind(this)} onMouseLeave={this.toggleMenu.bind(this) } >
-                    <button className="username" > { customer.first_name } <i className="fa fa-caret-down"> </i></button>
+                    {/* <button className="username" > { customer.first_name } <i className="fa fa-caret-down"> </i></button>
                     <div className={menuClass}>
                         <ul className="">
                             <li><Link to="/customer/account">My Account</Link></li>
                             <li><Link to="/upload">New Order</Link></li>
                             <li><Link to = "" onClick={this.logout.bind(this)}>Logout</Link></li>
                         </ul>
-                    </div>              
+                    </div>  */}
+                
+
+                    <Dropdown trigger={
+                        <Button>{ customer.first_name } <i className="fa fa-caret-down"> </i></Button>
+                    }>
+                    <NavItem><Link to="/customer/account">My Account</Link></NavItem>
+                    <NavItem divider />
+                    <NavItem><Link to="/upload">New Order</Link></NavItem>
+                    <NavItem divider />
+                    <NavItem><Link to = "" onClick={this.logout.bind(this)}>Logout</Link></NavItem>
+                    </Dropdown>             
                 </div> 
                     :
                 <div className="action-links ">

@@ -60,7 +60,7 @@ import axios from 'axios';
                     </a>
                     <div className="navbar-custom-menu">
                         <ul className="nav navbar-nav">
-                        <li><Button onClick= {() =>this.logout() }  floating large className='' waves='light' icon='logout' >Logout</Button> </li>
+                        <li><Button onClick= {() =>this.logout() }  floating className=''  waves='light' icon='logout' >Logout</Button> </li>
                             <li className="dropdown messages-menu">
                                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                                     <i className="fa fa-envelope-o"></i>

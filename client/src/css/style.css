@@ -22,7 +22,7 @@ img{
 background: none;
 }
 i.material-icons{
-  vertical-align: top !important;
+  vertical-align: middle !important;
 }
 nav{
  box-shadow : none;
@@ -325,7 +325,7 @@ padding:15px;
       /* margin: 0 auto; */
       width: 400px;
       overflow: auto;
-      background-color: white;
+      background: seagreen;
       box-shadow: 0 0 10px seagreen;
       padding: 40px;
       padding-top: 15px;

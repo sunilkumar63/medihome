@@ -22,7 +22,7 @@ editRow=(order_id) =>{
                     </div>
                     <div className="control-wrapper">
                     <ul className="options inline">                     
-                        <li><Button tooltip="Add customer" floating large className='' waves='light' icon='add' >Add Customer</Button></li>
+                        <li><Link to ="/admin/custome/new"><Button  floating large className='' waves='light' icon='add' >Add Customer</Button></Link></li>
                     </ul>
                     </div>
                 </div>

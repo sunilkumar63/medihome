@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import {Link} from 'react-router-dom';
 import Popup from "reactjs-popup";
 import Flash from "./components/Flash";
@@ -150,7 +150,7 @@ class Address extends React.Component {
                                 )
                         }) }
                         </div>
-                    : <h3>No Address available</h3>
+                    : <h5>No Address available</h5>
                     }
             </div>
     )

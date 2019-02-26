@@ -116,8 +116,7 @@ router.post('/uploadsave' , async (req, res , next) =>{
 else{
     return res.status(500).json("NO CUSTOMER DATA");
 } 
-                        
-     })
+ })
 
      router.get('/api/address/:customer_id?' , (req,res, next) =>{
         var cust_id = null;
@@ -166,4 +165,17 @@ else{
         order_api.createOrder(new_order);
         return ;
      })
+
+     router.post('/api/data/validator' , async (req, res , next) =>{
+      customer_api.validateAttribute(req.body, result=>{
+        res.json(result);
+      });
+    })
+
+    router.post('/api/customer/update' , async (req, res , next) =>{
+        customer_api.updateAttribute(req.query, result=>{
+          res.json(result);
+        });
+      })
+
 module.exports = router;

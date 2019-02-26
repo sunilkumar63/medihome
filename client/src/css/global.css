@@ -97,3 +97,6 @@ background: #ffff;
 padding: 10px;
 /* min-height: 200px; */
 }
+.error {
+    color : red !important;
+}

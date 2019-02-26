@@ -25,7 +25,7 @@ class Order extends React.Component {
                    }
                    </tbody>
                 </table>
-             : <h3>No order available</h3>
+             : <h5>No order available</h5>
             }
             </div>
     )

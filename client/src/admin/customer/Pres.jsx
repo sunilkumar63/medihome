@@ -24,7 +24,7 @@ class Pres extends React.Component {
                    }                   
                    </tbody>
                 </table>
-                : <h3>No address available</h3>
+                : <h5>No address available</h5>
             }
             </div>
     )

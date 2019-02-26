@@ -29,10 +29,15 @@ class UploadForm extends React.Component {
     
     componentDidMount(){ 
         var customer = JSON.parse(localStorage.getItem("customer"));
+        if(customer) {
         fetch('/api/customer/'+customer.id+'/addresses')
         .then(data => data.json())
         .then(res => this.setState({addresses : res.addresses , loader: false}))
         .catch(err => console.error("addr fetch ", err))
+        }else{
+            // window.materialize("Invalid Customer" , 5000)
+            this.props.history.push("/")
+        }
         // $('.footer').hide();
     }
 handleselectedFile = file => {

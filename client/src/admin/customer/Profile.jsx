@@ -29,7 +29,7 @@ class Profile extends React.Component {
                     <Col sm={12} lg={12} >
                         <div className="block">
                             <div className="title"><i class="material-icons">info</i>Information</div>
-                            <div className="sub"><div><span className="">First Name</span> {customer.first_name}</div></div> 
+                            <div className="sub"><div><span className="label">First Name</span> {customer.first_name}</div></div>  
                             <div className="sub"><div><span className="label">Last Name</span> {customer.last_name}</div></div> 
                             { customer.email_address &&
                             <div className="sub"><div><span className="label">Email Address</span><Link to={"mailto:"+customer.email_address}> {customer.email_address}</Link></div></div> 

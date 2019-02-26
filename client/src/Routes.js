@@ -19,6 +19,7 @@ import admin_dash from './admin/Dashboard.jsx'
 import cust_grid from './admin/customer/Grid.jsx';
 import order_grid from './admin/order/Grid.js';
 import cust_edit from './admin/customer/Edit.jsx';
+import cust_new from './admin/customer/Form.jsx';
 import order_edit from './admin/order/OrderEdit.js';
 import Prepare from './admin/order/Prepare';
 import Shipment from './admin/order/Shipment';
@@ -47,7 +48,8 @@ const Routes = () => (
                     <DefaultLayout exact path='/order/success' component={Success} />                    
                      <AdminLayout exact path="/admin/" component={admin_dash} />                     
                      <AdminLayout  exact path="/admin/customers/grid" component={cust_grid} />
-                     <AdminLayout  exact path="/admin/customer/:id?" component={cust_edit} />
+                     <AdminLayout  exact path="/admin/customer/:id" component={cust_edit} />
+                     <AdminLayout  exact path="/admin/custome/new" component={cust_new} />
                      <AdminLayout  exact path="/admin/orders/grid" component={order_grid} />
                      <AdminLayout  exact path="/admin/order/:id?" component={order_edit} />
                      <AdminLayout  exact path="/admin/order/:id/prepare" component={Prepare} />

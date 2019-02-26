@@ -113,13 +113,45 @@ getAddresses : customer_id =>{
             else reject({error : true , message : 'invalid customer ID'})
         })
     })
-}
-// comparePassword: function(candidatePassword, cb) {
-//     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-//         if (err) return cb(err);
-//         cb(null, isMatch);
-//     });
-// }
+},
 
+validateAttribute : async (params,cb) =>{ 
+var entity =  params.entity;
+var attribute =  params.attribute;
+var value =  params.value;
+var model ,record= null;
+switch(entity){
+    case 'customer' :
+        model = CustomerModel;
+    case 'order' :
+        model = OrderModel;    
+}
+if(entity == "customer") model = CustomerModel;
+if(model)
+    record = await model.findOne({ [ attribute] : [value]}).select('id');
+    if(record) return cb(true)
+    else return cb(false)
+},
+
+updateAttribute : async (params,cb) =>{ 
+    // console.log(params); return;
+    var entity =  'customer';
+    var id = parseInt(params.id);
+    var attribute =  params.attribute;
+    var value =  params.value;
+    if(attribute == "status" && entity == "customer") value = parseInt(value)
+    var model ,record= null;
+    switch(entity){
+        case 'customer' :
+            model = CustomerModel;
+        case 'order' :
+            model = OrderModel;    
+    }
+    if(entity == "customer") model = CustomerModel;
+    if(model)
+        record = await model.findOneAndUpdate({ id : [id]}, { [attribute] : value }  , {new: true})
+        if(record) return cb(record)
+        else return cb(false)
+    }
 }
  

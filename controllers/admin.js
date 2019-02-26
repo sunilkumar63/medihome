@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 var admin_api =  require('../models/api/admin')
+var customer_api =  require('../models/api/provider')
 
 router.post('/admin/config/save' , (req,res,next) =>{
     admin_api.saveConfig(req.body).then(result => res.json(result)).catch(err => res.json(false)) 
@@ -16,6 +17,12 @@ router.post('/api/admin/login' , (req, res , next) =>{
                                     res.send(data) 
                                  })
                         .catch( err => res.json(err) )
+})
+router.post('/admin/customer/address/save' , (req,res, next) =>{
+    var data = req.body;
+    customer_api.saveAddress(data)
+                       .then(result => res.send(true))
+                       .catch( err => { throw err })
 })
 router.get('/api/admin/logout', function (req,res) {
     if (req.session) { 

@@ -9,7 +9,7 @@ let timestampPlugin = require('../plugins/timestamp')
 var schema = new mongoose.Schema({
     first_name : String,
     last_name : String,
-    mobile_no : {type :Number , required: false , unique: false , index : { unique : false}},
+    mobile_no : {type :Number , required: true , unique: true , index : { unique : true}},
     password : {type: String , default: ''},
     email_address : String,
     status : {type : Number, default : 1}, 

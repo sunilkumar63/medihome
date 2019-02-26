@@ -2,13 +2,23 @@
  color: black;  
  /* background: #00a65a2b;  */
 }
-
-.admin-wrapper .header{
+form ::placeholder {
+  color: white;
+  font-size: 1.3em;
+}
+.form-wrapper input{
+    padding-left:10px !important;
+}
+form input:hover{
+    border: none !important;
+}
+.admin-wrapper >.header{
     /* background: #8dca6138; */
     /* border: 1px solid red; */
     /* position: fixed; */
     width: 100%;
-    height: 50px;
+    height: 60px;
+    /* margin-bottom: 15px; */
 }
 .admin-wrapper a{
     color: black;
@@ -25,10 +35,10 @@
 }
 .main-sidebar{
     /* background: #8dca6138; */
-    /* margin-top: 10px; */
+    margin-top: 15px;
 }
 .admin-wrapper .view{
-    /* margin-left: 230px; */
+    margin-top: 15px;
     padding-left: 15px;
     /* min-height: 100vh; */
     background: none !important;
@@ -38,6 +48,10 @@
     /* margin-left: 120px; */
     /* text-align: left !important; */
 }
+.view .messages {
+    font-size: 20px;
+    margin-bottom : 5px;
+} 
 .view .control-wrapper{
     /* position:fixed; */
     top:60px;

@@ -27,7 +27,7 @@
     top: 15%;
     left: 50%;
     transform: translate(-50%);
-    background-color: rgba(10, 10, 10, 0.5);
+    background-color: rgba(10, 10, 10, 0.2);
     box-shadow: 0 0 10px black;
     padding: 70px;
     padding-top: 15px;
