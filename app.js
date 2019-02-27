@@ -114,11 +114,13 @@ app.use(function(err, req, res, next) {
 global.log = function(data) {
     console.log(data);
 }
-let presc_path =  path.join(__dirname,'client/src/images/presc/');
+let presc_path =   public_dir+"/media/prescription/"
 let banner_path =  public_dir+"/media/banner/"
 !fs.existsSync(presc_path) && fs.mkdirSync(presc_path);
 !fs.existsSync(banner_path) && fs.mkdirSync(banner_path);
 
 global.presc_image_path = presc_path
 global.banner_image_path = banner_path
+global.presc_image_url = "/media/prescription/"
+global.banner_image_url = "/media/banner/"
 module.exports = app;

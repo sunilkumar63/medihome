@@ -51,7 +51,7 @@ updateData = (value) =>{
                                 { customer.status == 0 &&
                                     <button className ="btn waves-effect green"  onClick={() => this.updateData(1) }><i className="material-icons left">play_arrow</i>Make Active</button>        
                                 }
-                                    <button className ="btn waves-effect blue small"  onClick={() => this.props.history.goBack()}><i className="material-icons left">delete</i>Delete</button>        
+                                    {/* <button className ="btn waves-effect blue small"  onClick={() => this.props.history.goBack()}><i className="material-icons left">delete</i>Delete</button>         */}
                                </div>
                                </div>
                    { customer.status == 0 &&

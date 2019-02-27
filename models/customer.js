@@ -10,7 +10,7 @@ var schema = new mongoose.Schema({
     first_name : String,
     last_name : String,
     mobile_no : {type :Number , required: true , unique: true , index : { unique : true}},
-    password : {type: String , default: ''},
+    password : {type: String , default: '' , select: false},
     email_address : String,
     status : {type : Number, default : 1}, 
     orders : [{ type : mongoose.Schema.Types.ObjectId, ref : "Orders"}],

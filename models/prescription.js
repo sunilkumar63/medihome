@@ -20,6 +20,6 @@ schema.virtual('creation_date')
    return moment(this.createdAt).format('MMMM Do YYYY, h:mm a')
 });
 schema.virtual('image_src').get(function(){
-   return global.presc_image_path+this.file
+   return global.presc_image_url+this.file
 })
 module.exports = mongoose.model('Prescriptions' , schema)

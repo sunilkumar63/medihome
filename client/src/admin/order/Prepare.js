@@ -5,8 +5,13 @@ import Alert from '../../components/Alert'
 import {sendMedicineEmail} from '../../helper/sender'
 // import { Form, Input,TextArea,  ValidationTypes} from "super-easy-react-forms";
 import { Form,Tab,NavItem , Row , Col , Nav}  from 'react-bootstrap'; 
+import { Input}  from 'react-materialize'; 
 import { Button, Icon, Card} from 'react-materialize';
-
+import {
+    Form,
+    Input,
+    ValidationTypes
+  } from "super-easy-react-forms";
 class Prepare extends React.Component{
     constructor(props){
         super(props);
@@ -68,23 +73,15 @@ items_arr.map(medicine =>{
             !order ? <Loader /> : 
             <div className="view page content-wrapper">               
                 <div className="page-head clearfix">
-                    <div className="title-wrapper">
-                        <h5 className ="page-title">Prepare Order Medicine </h5>
-                    </div>
-                    <div className="control-wrapper">
-                        <ul className="options inline">                           
-                             <li><Button waves='default' className="red" onClick={() => this.props.history.goBack()}>Back<Icon left>replay</Icon></Button></li>
-                            <li><Button waves='default' className="light" onClick={this.saveMedicine}>Save<Icon left>save</Icon></Button></li>
-                            <li><Button waves='default' className="light" onClick={sendMedicineEmail(order)}>Send to Customer<Icon left>send</Icon></Button></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div className = "page-container">
-                <div className="info">
-                <p><span>Order ID  </span>{order.id}</p>
-                </div>
-               
+                             <div className="title-wrapper">
+                                <h4 className ="page-title">Prepare Medicine List</h4>                
+                            </div>
+                            <div className="control-wrapper">     
+                                <Button waves='light' className="red" onClick={() => this.props.history.goBack()}>Back<Icon left>replay</Icon></Button>
+                                <Button waves='orange' className="light" onClick={this.saveMedicine}>Save<Icon left>save</Icon></Button>
+                                {/* <Button waves='green' className="light" onClick={sendMedicineEmail(order)}>Send to Customer<Icon left>send</Icon></Button> */}
+                               </div>
+                               </div>
                 <Col className="block col-sm-6 col-lg-6">                    
                     <div className="title"> Medicine List</div>
                     { list.length >0 ?
@@ -108,7 +105,15 @@ items_arr.map(medicine =>{
                             <label>Name</label>
                             <input type="text" name="name" required></input>
                             </div>
-
+                            <Input
+                                        name="pincode"                        
+                                        placeholder="Pincode"
+                                        missingMessage="This field is required."
+                                        shouldPreventInvalid
+                                        errorMessage ="Invalid"
+                                        validation={ValidationTypes.NUMBER}
+                                        isRequired  
+                                        />  
                             <div className="form-group">
                             <label>Price</label>
                             <input type="text" className="form-inline" name="price" required></input>
@@ -123,7 +128,6 @@ items_arr.map(medicine =>{
                 </Col>    
 }
             </div>
-                </div>
           
         )
     }

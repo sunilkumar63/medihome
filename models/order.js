@@ -42,7 +42,7 @@ schema.virtual('ship_address', {
     ref: 'Addresses',
     localField: 'shipping_address',
     foreignField: 'id',
-    justOne: false 
+    justOne: true 
   });
 schema.virtual('prescription', {
     ref: 'Prescriptions',

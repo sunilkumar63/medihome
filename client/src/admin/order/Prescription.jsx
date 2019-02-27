@@ -10,10 +10,6 @@ class Prescription extends React.Component {
         super(props);
         this.state = {order_id : null,loader: true , list : [],items : [] }
     }
-
-async componentDidMount(){
-}
-
 render(){
         var prescription = this.props.prescription;
         return (
@@ -21,7 +17,7 @@ render(){
             <div className="tab-view">                          
                     <div className="title text-center">Prescription Information</div>                  
                     <Col className="" sm="6" lg="6">
-                         <MediaBox src="https://lorempixel.com/350/350/nature/1" caption="A demo media box1" width="300px"/>
+                         <MediaBox src={prescription.image_src} caption={prescription.name} width="350px"/>
                     </Col>
                     <Col className="col-sm-6 col-lg-6">
                         <div className=""><Chip>Name </Chip>{ prescription.name}</div>

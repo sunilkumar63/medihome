@@ -34,11 +34,10 @@ getCustomerOrder : customer_id =>{
 getOrder : async (id,entity) =>{
     return new Promise( (resolve, reject) => {
     var order =  OrderModel.findOne({id : id})
-    if(entity === 'all') { 
-        order.populate('medicines') ; order.populate('ship_address');order.populate('prescription');order.populate('chat_history').populate('customer','first_name last_name') 
+    if(entity == 'all') { 
+        order.populate('medicines') ; order.populate('ship_address', {updatedAt:0 , createdAt :  0, _id : 0 });order.populate('prescription');order.populate('chat_history').populate('customer','first_name last_name') 
      }
     if(entity !== null && entity !== 'all')  order.populate(entity)
-
     if(order) resolve(order)
     else reject({error : true , message : 'invalid order ID'})
     }).catch(err => null)
