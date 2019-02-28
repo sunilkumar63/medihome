@@ -164,3 +164,6 @@ html{
     margin-left: 0;
 }
 }
+.med-form input::placeholder{
+    color:black;
+}
