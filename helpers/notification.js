@@ -21,7 +21,7 @@ module.exports.orderEmail = (data,callback)  =>{
 		});
 }
 module.exports.orderUpdateEmail = (data,status_code,callback)  =>{
-	let to = data.customer[0].email_address
+	let to = 'nickdev093@gmail.com';//data.customer[0].email_address
 	let sub =prefix+"Order Update Email";
 	let html ='';
 	if(data)
@@ -29,6 +29,15 @@ module.exports.orderUpdateEmail = (data,status_code,callback)  =>{
 		this._sendEmail(to,sub,html , function(rs){
 			callback(rs)
 		});
+}
+module.exports.orderShipmentEmail = (order,callback)  =>{
+	let to = 'nickdev093@gmail.com';//order.customer[0].email_address
+	let sub =prefix+"Order Confirmation";
+	if(order)
+ 		var html = 	email_template_helper.getOrderConfirmationTemplate(order)
+				this._sendEmail(to,sub,html , function(rs){
+					callback(rs)
+				});
 }
 module.exports._sendEmail =  ($to,$sub,$html , cb) =>{
 		var transporter = nodemailer.createTransport({

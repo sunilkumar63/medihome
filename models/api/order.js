@@ -90,19 +90,24 @@ updateStatus : (id , status_code) =>{
                 if(order.status !== 2)  reject(false)             
             })
         }
-        
-        OrderModel.updateOne({id : post_data.order_id} ,{$set: { 
+        OrderModel.findOneAndUpdate({id : post_data.order_id} , { 
                                  'grand_total' : post_data.grand_total,
                                  'shipping_charge' :  post_data.shipping_charge,
                                  'extra_charge' :  post_data.extra_charge,
+                                 'tracking_no' : post_data.tracking_no,
                                  'status' : 3
-                                }}, {upsert:true})
-                                .then(res =>{
-                                    //send Email
+                                }  , {upsert:false} )
+                                .then(order =>{
+                                    //send Email             
+                                    CustomerModel.findOne({id : order.customer_id}).select('email_address first_name mobile_no').then(customer=>{
+                                        order.customer = customer;                                      
+                                        sender.orderShipmentEmail(order)
+                                        resolve(order)
+                                    })   
                                     //estimate Delivery TIme
-                                    resolve(res)
+                                    
                                     })
-                                .catch(err => console.log(err))
+                                .catch(err => console.log("Shipment LOG : ",err))
     })
  },
  getChatHistory : (id , cb) =>{ console.log(id)
