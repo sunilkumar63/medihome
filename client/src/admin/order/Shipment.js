@@ -82,7 +82,7 @@ let extra_charge =  0;//event.target.elements.extra_charge.value;
 let ship_obj = {tracking_no : tracking_no ,shipping_charge : shipping_charge  , extra_charge : extra_charge , order_id :  order.id , grand_total : this.state.grand_total }
 console.log(ship_obj)
 if(tracking_no) {
-    shipOrder(ship_obj , function(){
+    shipOrder(ship_obj , () =>{
         alert("Order done");
         props.history.goBack()    
     })

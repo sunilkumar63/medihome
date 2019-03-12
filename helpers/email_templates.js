@@ -45,3 +45,18 @@ module.exports.getOrderUpdateTemplate = (order,last_status_code) =>{
         html += '</div>'
         return html;
 } 
+
+module.exports.getOrderConfirmationTemplate = (order) =>{
+  var html = '';
+  if(order) {
+        html += '<div>'
+        html += `<h3>Dear ${order.customer[0].first_name}</h3>`
+        html += `Your order has beed shipped. It will be delivery at door-step.`
+        html+= `You can also track order. <div> Track ID <b>`+order.tracking_no+`</b></div>`
+        html += "<p style='color : red'>This is auto-generated email. Please do not reply</p>"
+        html += '<div style = "font-size:15px; text-transform: capitalize;">Thanks</div>'
+        html += '<div style = "font-size:15px; text-transform: capitalize;">MediHome - Direct to Home</div>'
+        html += '</div>'        
+  }
+  return html;
+}

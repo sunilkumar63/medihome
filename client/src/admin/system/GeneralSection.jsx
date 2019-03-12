@@ -50,14 +50,14 @@ render(){
         return (
             <section className="tab-view" refs="general">                       
             <Col sm={5} lg={5} className="block">   
-             <Form onSubmit={this.saveConfig} name="test" ref="test" submitText ="Save">  
+             {/* <Form onSubmit={this.saveConfig} name="test" ref="test" submitText ="Save">   */}
                            
                     <div className="form-group">                   
                         <label>Page Title</label>
                         <Input
                         name="page_title"                        
                         placeholder="Page title"                
-                        value = { general_data && general_data.page_title }
+                        defaultValue = { general_data && general_data.page_title }
                         validation={ValidationTypes.String}
                         missingMessage="This field is required."
                         isRequired
@@ -73,15 +73,15 @@ render(){
                         missingMessage="This field is required."
                         />
                     </div>
-                    <div className="form-group">
-                        <label>Logo</label>
-                        <Input
-                        type="file"
-                        name="logo"                        
-                        placeholder="Website Logo"
-                        />
-                    </div>              
-                </Form>
+                        {/* <div className="form-group">
+                            <label>Logo</label>
+                            <Input
+                            type="file"
+                            name="logo"                        
+                            placeholder="Website Logo"
+                            />
+                        </div>               */}
+                {/* </Form> */}
                 </Col>
                 </section>
         )

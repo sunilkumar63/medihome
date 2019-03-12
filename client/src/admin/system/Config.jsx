@@ -17,7 +17,7 @@ class Config extends React.Component{
         super(props);
         this.state = {title : "General Information" }
         this.toggleAlert = this.toggleAlert.bind(this)
-        this.saveConfig = this.saveConfig.bind(this)
+      //  this.saveConfig = this.saveConfig.bind(this)
     }
     async componentDidMount(){
         document.title = "Admin-System Configuration"
@@ -27,7 +27,7 @@ class Config extends React.Component{
         // .then(res => this.setState({order : res , order_id : this.props.match.params.id}))
 }
 saveConfig = (data) =>{
-    console.log(data)
+    console.log(data); return;
     fetch('/admin/config/save', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -49,7 +49,7 @@ render(){
             <div className="view content-wrapper">  
                  <div className="page-head clearfix">
                              <div className="title-wrapper">
-                                <h3 className ="page-title">System Settings</h3>
+                                <h4 className ="page-title">System Settings</h4>
                             </div>
                             <div className="control-wrapper">
                             <button className ="bacbs"  onClick={() => this.props.history.goBack()}>Back</button>  
@@ -67,13 +67,13 @@ render(){
                         </Nav>
                         </Col>
                         <Col sm={9} >
-                        {/* <Form onSubmit={this.saveConfig}>                 */}
+                        <Form onSubmit={this.saveConfig.bind(this)} submitText="SAVE">                
                         <Tab.Content >
                             <Tab.Pane eventKey="first"><General /></Tab.Pane>
                             <Tab.Pane eventKey="second"></Tab.Pane>
                         </Tab.Content>
-                        {/* </Form> */}
-                        </Col>
+                        </Form>
+                        </Col> 
                     </Row>
                 </Tab.Container>
             </div>

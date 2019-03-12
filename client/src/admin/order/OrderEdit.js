@@ -8,6 +8,7 @@ import {updateOrderStatus,shipOrder} from '../../helper/order_hlp'
 import Basic  from './Basic.jsx';
 import Medicine  from './Medicine.jsx';
 import Prescriptions from './Prescription.jsx'  
+import Shipment from './Ship_info.jsx'  
 import TalkHistory from './TalkHistory.jsx'  
 import { withAlert } from 'react-alert' 
 import { Button, Icon, Card} from 'react-materialize';
@@ -159,6 +160,7 @@ render(){
                             <Tab.Pane eventKey="first"><Basic order={order}  /></Tab.Pane>
                             <Tab.Pane eventKey="second"><Medicine medicines={order.medicines}  /></Tab.Pane>
                            <Tab.Pane eventKey="fourth"> <Prescriptions prescription ={order.prescription}/></Tab.Pane> 
+                           <Tab.Pane eventKey="five"> <Shipment order ={order}/></Tab.Pane> 
                            <Tab.Pane eventKey="sixth"><TalkHistory order={order} /></Tab.Pane>
                         </Tab.Content>
                         </Col>
