@@ -14,8 +14,9 @@ render(){
         var prescription = this.props.prescription;
         return (
             !prescription ? <Loader /> : 
-            <div className="tab-view">                          
-                    <div className="title text-center">Prescription Information</div>                  
+            <div className="tab-view"> 
+            <div className="block">                        
+                    <div className="title text-center">Prescription Information</div>              
                     <Col className="" sm="6" lg="6">
                          <MediaBox src={prescription.image_src} caption={prescription.name} width="350px"/>
                     </Col>
@@ -30,7 +31,7 @@ render(){
                     <div className="">{ prescription.file}</div>
                     </div>
                     } */}
-                    
+                    </div> 
                 </div>
         )
 }

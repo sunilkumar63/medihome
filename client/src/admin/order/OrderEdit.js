@@ -117,13 +117,13 @@ render(){
                             <div className="control-wrapper">
                             <Button waves='default' className="red" onClick={() => this.props.history.goBack()}>Back<Icon left>replay</Icon></Button>
                             <Button waves='teal' className ="blue" onClick={() => this.props.history.goBack()}>Send Email<Icon  left>email</Icon></Button>  
-                            {  status !== 5 && status !== 6 &&
-                             <Button waves='teal' className ="light"  onClick={this.HandlePrepare}>Prepare Medicine<Icon left>alarm_add</Icon></Button>  
+                            {  status !== 5 && status !== 6 && status !== 3 &&
+                              <Button waves='teal' className ="light"  onClick={this.HandlePrepare}>Prepare Medicine<Icon left>alarm_add</Icon></Button>  
                             }
                             {  (status !== 0 && status !== 6)&&
                             <Button waves='teal' className ="light"  onClick={() =>this.confirmOrderTask(0)}>Cancel<Icon left>cancel</Icon></Button> 
                             }
-                            {  status == 0 &&
+                            {  status == 0 && status !== 3 &&
                             <Button waves='teal' className ="red"  onClick={() =>this.confirmOrderTask(2)}>Undo Cancel<Icon left></Icon></Button>
                             }
                             { (status !== 4 && status !== 5 && status !== 6 && order.status >= 3 && status !== 0)   &&
@@ -132,7 +132,7 @@ render(){
                             {  status === 4 &&
                             <Button waves='yellow' className ="light"  onClick={() =>this.confirmOrderTask(2)}>UnHold<Icon left>cancel</Icon></Button> 
                             }
-                            {  status !== 4 && status !== 3 && status !== 6 && status !== 0 &&
+                            {  status !== 4 && status !== 3 && status !== 6 && status !== 0 && status !== 1 &&
                                  <Button waves='' className ="light"  onClick={this.confirmShip}>Ship Now<Icon left>add_shopping_cart</Icon></Button> 
                             }
                             {  (status === 3) &&
@@ -151,7 +151,9 @@ render(){
                             { order.prescription &&
                             <NavItem eventKey="fourth" onClick ={this.handlePageTitle}>Prescriptions</NavItem>
                             }
-                            <NavItem eventKey="five" onClick ={this.handlePageTitle}>Delivery</NavItem>
+                            {/* { status ==3 ||  status ==6 && */}
+                            <NavItem eventKey="five" onClick ={this.handlePageTitle}>Shipment</NavItem>
+                            {/* } */}
                             <NavItem eventKey="sixth" onClick ={this.handlePageTitle}>Talk History</NavItem>
                         </Nav>
                         </Col>
