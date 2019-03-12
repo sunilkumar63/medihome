@@ -69,8 +69,13 @@ router.get('/api/customer/:id?/:all?' , (req, res , next) =>{
                     .catch(err => res.json(err))
 })
 
+router.get('/api/customers/active' , (req, res , next) =>{    
+    customer_api.getAllActiveCustomers(req.params)
+                    .then(result => res.json(result))
+                    .catch(err => res.json(err))
+})
 router.get('/api/customers' , (req, res , next) =>{    
-    customer_api.getAllCustomer()
+    customer_api.getAllCustomer(req.params)
                     .then(result => res.json(result))
                     .catch(err => res.json(err))
 })
@@ -78,7 +83,6 @@ router.get('/api/customers' , (req, res , next) =>{
 router.post('/uploadsave' , async (req, res , next) =>{
     var data = req.body;
     if(!req.body.name || !req.files ) return res.status(500).send("Not valid Data");
-
     if(req.session) { 
         if(req.session.customer) {   
             var customer = req.session.customer;  
@@ -120,7 +124,7 @@ else{
 
      router.get('/api/address/:customer_id?' , (req,res, next) =>{
         var cust_id = null;
-        if(req.session.customer) {
+        if(req.session.customer && !req.params.customer_id) {
             let customer  = req.session.customer;
             cust_id = customer.id
         }

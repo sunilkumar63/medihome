@@ -40,10 +40,17 @@ getCustomer :  async  (id , populateEntity = null) => {
         }
         }).catch(err => null)
 },
-
+getAllActiveCustomers : (status = 1) => {
+    return new Promise( (resolve , reject) =>{
+        Customer.find({status : 1 }).populate('addresses').then( res =>{  
+                if(res) resolve(res)
+                else reject({error : true , message : 'zero customer'})
+            })
+        }).catch(err => null)
+},
 getAllCustomer : () => {
     return new Promise( (resolve , reject) =>{
-        Customer.find().then( res =>{  
+        Customer.find({}).then( res =>{  
                 if(res) resolve(res)
                 else reject({error : true , message : 'zero customer'})
             })

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import Loader  from '../../components/Loader'
 import Alert from '../../components/Alert'
 import {sendMedicineEmail} from '../../helper/sender'
+import {formatPrice} from '../../helper/data'
 // import { Form, Input,TextArea,  ValidationTypes} from "super-easy-react-forms";
 import { Tab,NavItem , Row , Col , Nav}  from 'react-bootstrap'; 
 // import { Input}  from 'react-materialize'; 
@@ -18,6 +19,8 @@ class Prepare extends React.Component{
         this.state = {order_id : null,loader: true , list : [], showForm: false , items : [] ,total_amount : 0 }
         this.addMedi = this.addMedi.bind(this)
         this.saveMedicine = this.saveMedicine.bind(this)
+        this.remove = this.remove.bind(this)
+        this.deleteRow = this.deleteRow.bind(this)
     }
 
     async componentDidMount(){        
@@ -26,7 +29,7 @@ class Prepare extends React.Component{
         document.title = "Prepare Order #"+order_id;
         let total_tmp = 0;
         order.medicines.forEach(med =>{ console.log(med.price)
-total_tmp +=  parseFloat(med.price)
+                total_tmp +=  parseFloat(med.price * med.qty)
          })
 
         if(order) this.setState({list : order.medicines , total_amount : total_tmp})
@@ -36,25 +39,45 @@ total_tmp +=  parseFloat(med.price)
             .then(res => { 
                 let total_tmp = 0;
                 let medicines = res.medicines
-                medicines.forEach(med =>{ console.log(med.price)
-total_tmp +=  med.price;
+                medicines.forEach(med =>{ 
+                        total_tmp +=  med.price * med.qty;
                  })
                     this.setState({order : res ,order_id: order_id , list: res.medicines, items : [],success :false , total_amount : total_tmp})}
                 ) 
 }
 addMedi = (event) =>{
-    // console.log(event); return;
-    // event.preventDefault()
     // let name =  event.target.elements.name.value;
-    // let qty =  event.target.elements.qty.value;
-    // let price =  event.target.elements.price.value;
     // let item = {name : name , qty : qty , price : price}
     this.setState( (state) => {
         state.items = state.items.concat(event);
         state.list = state.list.concat(event);
+        var updated_total = event.price * event.qty;
+        this.setState({total_amount : this.state.total_amount + updated_total })
         return state;
     }); 
 }
+remove = (id,row_index,amount) =>{
+    let order_id =  this.props.match.params.id
+    id && order_id &&
+    fetch('/api/medicine/delete', {
+        method: 'POST',
+        body: JSON.stringify({_id : id , order_id : order_id}),
+        headers: {
+            'Content-Type': 'application/json'
+          }
+      })
+      .then(res => res.json())
+      .then(res =>{ console.log(true); 
+        this.setState({total_amount : this.state.total_amount - amount })
+        this.deleteRow(row_index) })
+      .catch(err => console.log(err))
+  }
+
+  deleteRow = (index) =>{
+    var list     = [...this.state.list];
+    list.splice(index, 1);
+    this.setState({list});
+  }
 
 saveMedicine = (event) =>{
 var list_arr  = this.state.list;
@@ -62,18 +85,19 @@ var items_arr  = this.state.items;
 var props = this.props;
 
 if(items_arr.length > 0) {
-items_arr.map(medicine =>{
-    medicine.order_id =this.props.match.params.id
+    var data = {order_id : this.props.match.params.id , items : items_arr}
      fetch('/api/medicine/save', {
         method: 'POST',
-        body: JSON.stringify(medicine),
+        body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
           }
       })
       .then(res => res.json())
-      .then(res =>{ props.history.goBack() ;console.log(res) }).catch(err => console.log(err))
-})
+      .then(order =>{ 
+                            // if(order) this.setState({list : order.medicines , total_amount : order.grand_total}) 
+                            props.history.goBack();   
+                          }).catch(err => console.log(err))
 } else{
     props.history.goBack()
 }
@@ -94,47 +118,47 @@ items_arr.map(medicine =>{
                                 <Button waves='orange' className="light" onClick={this.saveMedicine}>Save<Icon left>save</Icon></Button>
                                 <Button waves='green' className="light" onClick={sendMedicineEmail(order)}>Send to Customer<Icon left>send</Icon></Button>
                                </Col>
-                               </div>
-                  
+                   </div>
+                               <div className="messages"><span className="subtitle">You are preparing medicine list. </span></div>
                 <Col className="block col-sm-6 col-lg-6">                    
-                    <div className="title"> Medicine List</div>
-                    { list.length >0 ?
+                    {/* <div className="title"> Medicine List</div> */}
+                    { list.length >0 ? <>
                     <table className="table">
-                    {/* <div className="head"><soa>Name</td><td>Price</td><td>Qty</td></th> */}
                     <tbody>
+                    <tr className="heading"><td>Name</td><td>Price</td><td>Qty</td><td>Sub Total</td><td>Action</td></tr>
                      {  list.map((medi,index) => {
-                        return(<tr key={index}><td> {medi.name}</td><td> {medi.price}</td><td> {medi.qty}</td></tr>)                        
+                        return(<tr key={index}><td> {medi.name}</td><td> {formatPrice(medi.price)}</td><td> {medi.qty}</td><td> { formatPrice(medi.qty * medi.price)}</td>
+                        <td><Button  small className="btn-sm waves-effect waves-light green" onClick={ () =>this.remove(medi._id,index,medi.price * medi.qty)} >Delete</Button></td></tr>)                        
                      })
                     }
                   </tbody>
-                  </table> : <h4>No Medicine</h4>
+                  </table>                 
+                  <div className=""><b>Total Amount - { formatPrice(this.state.total_amount)}</b></div> </> : <h4>No Medicine</h4>
                     }
-                    
-                    <div className="add" onClick={() => this.setState({showForm : !this.state.showForm})} ><Icon left>add_circle_outline</Icon>Add Medicine</div>
-                    <div className="messages error text-center"><i className="material-icons">block</i>Total Amount - { this.state.total_amount}</div>
+                  <button className="btn waves-effect waves-light red">  <div className="add" onClick={() => this.setState({showForm : !this.state.showForm})} ><Icon left>add_circle_outline</Icon>Add Medicine</div></button>
                 </Col>
 { showForm &&
                 <Col sm={5} lg={5} className="med-form block">
-                        <Form id="mediform" name="mediform" className="mediForm" onSubmit={this.addMedi.bind(this)} submitText="Add To List">
-                            <div className="form-group">
-                            {/* <label>Name</label> */}
+                        <Form id="mediform" name="mediform" className="mediForm" onSubmit={this.addMedi.bind(this)} submitText="Add To List" >
+                            
+                            <p>Name</p>
                             {/* <input type="text" name="name" required></input> */}
                             <Input
                                         name="name"                        
-                                        placeholder="Name"
+                                        // placeholder="Name"
                                         missingMessage="This field is required."
                                         shouldPreventInvalid
                                         errorMessage ="Invalid"
                                         validation={ValidationTypes.TEXT}
                                         isRequired  
                                         />
-                            </div>
+                            
                             <div className="form-group">
-                            {/* <label>Price</label> */}
+                            <p>Price</p>
                             {/* <input type="text" className="form-inline" name="price" required></input> */}
                             <Input
                                         name="price"                        
-                                        placeholder="Price"
+                                        // placeholder="Price"
                                         missingMessage="This field is required."
                                         shouldPreventInvalid
                                         errorMessage ="Invalid"
@@ -144,11 +168,11 @@ items_arr.map(medicine =>{
                             </div>
 
                             <div className="form-group">
-                            {/* <label>Quantity</label> */}
+                            <p>Quantity</p>
                             {/* <input type="text"  name="qty" required></input> */}
                             <Input
                                         name="qty"                        
-                                        placeholder="Quantity"
+                                        // placeholder="Quantity"
                                         missingMessage="This field is required."
                                         shouldPreventInvalid
                                         errorMessage ="Invalid"
@@ -159,9 +183,8 @@ items_arr.map(medicine =>{
                             {/* <Button type="submit" waves='light' className="red">Add To List<Icon left>add</Icon></Button> */}
                         </Form>
                 </Col>    
-}
+}  
             </div>
-          
         )
     }
 }

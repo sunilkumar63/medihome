@@ -68,7 +68,8 @@ header > div {
 
 .messages {
   background: #EAEDE0;
-    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     color: green;
     -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;

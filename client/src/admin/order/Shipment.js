@@ -5,12 +5,13 @@ import { Form, Input, ValidationTypes} from "super-easy-react-forms";
 import {  Row , Col , Nav}  from 'react-bootstrap'; 
 import {shipOrder} from '../../helper/order_hlp'
 import { withAlert } from 'react-alert'
+import {formatPrice} from '../../helper/data'
 import { Button, Icon, Card} from 'react-materialize';
 
 class Shipment extends React.Component{
     constructor(props){
         super(props);
-        this.state = {order_id : null,loader: true , list : [],shipping_charge : 0,grand_total : 0,tmp_total : 0 }
+        this.state = {order_id : null,order: null ,loader: true , list : [],shipping_charge : 0,grand_total : 0,tmp_total : 0 }
         this.getMedicines = this.getMedicines.bind(this)
         this.shipOrder = this.shipOrder.bind(this)
         this.handleShippingCharge = this.handleShippingCharge.bind(this)
@@ -19,10 +20,10 @@ class Shipment extends React.Component{
 
     async componentDidMount(){        
         let order_id =  this.props.match.params.id
-        let order  =  this.props.location.state;      
-        if(order.status !== 2 )  this.props.history.goBack()   ;     
+        // let order  =  this.props.location.state;      
+        // if(order.status !== 2 )  this.props.history.goBack()   ;     
         if(order_id)
-            await fetch('/api/order/'+order_id+"/all")
+            await fetch('/api/order/'+order_id+"/addresses")
             .then(data => data.json())
             .then(res => {
                 if(res.status !== 2 ) {                     
@@ -30,9 +31,10 @@ class Shipment extends React.Component{
                      this.props.alert.show('Already Shipped or something error', {
                         type: 'error'
                       })
-                         }
+                 }
+                 this.setState({order : res , grand_total : res.grand_total ,tmp_total : res.grand_total })
             })
-            if(order) this.setTotals();    
+            // if(order) this.setTotals();    
 }
 setTotals  = async () => {
     var grand_total = 0;
@@ -52,12 +54,14 @@ getMedicines = async () =>{
 }
 handleShippingCharge = (event) =>{
     let shipping_charge = event.target.value;
-    let new_total =this.state.grand_total;
-    let tmp_total =this.state.tmp_total;
-    if(tmp_total === 0)  tmp_total = this.setState({tmp_total : this.state.grand_total});
+    let new_total =this.state.tmp_total;
+    // let tmp_total =this.state.tmp_total;
+    // if(tmp_total === 0)  tmp_total = this.setState({tmp_total : this.state.grand_total});
     if(shipping_charge === '') shipping_charge = 0
-    new_total = Math.round( parseInt(shipping_charge) + parseFloat(tmp_total))
-    this.setState({shipping_charge : shipping_charge , grand_total : new_total})
+    if(shipping_charge >= 0){
+        new_total =  parseFloat(shipping_charge) + parseFloat(new_total)
+        this.setState({shipping_charge : shipping_charge , grand_total : new_total})
+    }
 }
 handleExtraCharge = (event) =>{
     let extra_charge = event.target.value;
@@ -69,6 +73,7 @@ handleExtraCharge = (event) =>{
     this.setState({grand_total : new_total})
 }
 shipOrder = (event) =>{
+var props = this.props;
 event.preventDefault()
 let order  = this.props.location.state;
 let tracking_no =  event.target.elements.tracking_no.value;
@@ -79,37 +84,30 @@ console.log(ship_obj)
 if(tracking_no) {
     shipOrder(ship_obj , function(){
         alert("Order done");
-        this.props.history.goBack()    
+        props.history.goBack()    
     })
 } else{
-    this.props.history.goBack()
+    props.history.goBack()
 }
 }
     render(){
-        const {grand_total,shipping_charge} = this.state;
-        var order = this.props.location.state;
-        if(!order)
-         order = this.state.order;
-
+        const {grand_total,order,shipping_charge} = this.state;
+        // var order = this.props.location.state;
+        // if(order)
+        //  order = this.state.order;
         return(
             !order ? <Loader /> : 
             <div className="view page content-wrapper">               
                 <div className="page-head clearfix">
-                    <div className="title-wrapper">
-                        <h4 className ="page-title">Order Shipment Process</h4>
-                    </div>
-                    <div className="control-wrapper">
-                        <ul className="options inline">                           
-                            <li><Button waves='default' className="red" onClick={() => this.props.history.goBack()}>Back<Icon left>replay</Icon></Button> </li>                        
-                        </ul>
-                    </div>
-                </div>
-
-                <div className = "page-container">
-                    <div className="info">
-                        <p><span>Order ID  </span>{order.id}</p>
-                    </div>
-                
+                <Col sm={2} lg={2} className="cotrol-wrapper">     
+                                <Button waves='light' className="red" onClick={() => this.props.history.goBack()}>Back<Icon left>replay</Icon></Button>
+                            </Col>
+                            <Col sm={5} lg={5} className="tditle-wrapper">
+                                <h4 className ="page-title">Order Shipment</h4>                
+                            </Col>                            
+                  </div>
+                  <div className="messages"><span className="subtitle">You are shipping order ID - {order.id} </span></div>
+                <div className = "page-container">                
                     <Col sm={5} lg={5} className="block-large">
                     <form onSubmit={this.shipOrder} className="form" autoComplete="off">
                     <div className="form-group-lg">
@@ -141,17 +139,13 @@ if(tracking_no) {
                                 onChange= {this.handleExtraCharge}
                                 />                             
                                 </div>                    */}
-                        <button
-                                type="submit"
-                                name="submit"                        
-                                className="btn-success"
-                                >Ship Now</button>
+                                 <Button name="submit"  waves='orange' className="light"  type="submit">Ship Now<Icon left>save</Icon></Button>
                 </form>
 
                     </Col>
                     <Col sm={5} lg={5} className="block-large">                        
-                        <div className="total currency">Shipping Charge  :: {shipping_charge} </div>
-                        <div className="total currency"><p>Grand Total :: Rs.{ grand_total }</p></div>
+                        <div className="total currency">Shipping Charge  :: {formatPrice(shipping_charge)} </div>
+                        <div className="total currency">Grand Total :: { formatPrice(grand_total) }</div>
                     </Col>
                 </div>
                 </div>

@@ -46,7 +46,7 @@ getOrder : async (id,entity) =>{
 getOrders : (params) =>{
     return new Promise( async (resolve, reject) => {
                     if(params.type === 'recent') 
-                        orders = await OrderModel.find().sort('-date').limit(5)
+                        orders = await OrderModel.find().limit(5)
                         .populate('customer','first_name last_name')
                         .then(result => resolve(result))
                         .catch(err => { console.log(err); reject(false) })
@@ -81,6 +81,26 @@ updateStatus : (id , status_code) =>{
                                                             })
                                                         .catch(err => console.log(err))
     })
+ },
+ updateGrandTotal : async(order,cb) =>{
+     var amount =  0;
+    var order = await OrderModel.findOne({id : order}).populate('medicines')
+    // getGrandTotal(order,function(amount){
+    //     order.grand_total = amount;
+    //     order.save(record =>{
+    //        if(record) return cb(true)
+    //        else return cb(false)
+    //     })
+    // })
+ },
+ getGrandTotal : async(order,cb) =>{
+    var grand_total =  0;
+    // var order_data = order.populate('medicines');
+        var medicines = order.medicines
+        medicines.forEach(medi =>{
+            grand_total += (medi.price * medi.qty);
+     })
+    if(grand_total)  cb(grand_total)
  },
 
  shipOrder : (post_data , status_code = 3) =>{ 

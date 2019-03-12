@@ -135,10 +135,11 @@ render(){
                                  <Button waves='' className ="light"  onClick={this.confirmShip}>Ship Now<Icon left>add_shopping_cart</Icon></Button> 
                             }
                             {  (status === 3) &&
-                                <button className ="btn-success"  onClick={() =>this.confirmOrderTask(6)}>Mark as Complete</button>  
+                                <Button waves='' className ="light"  onClick={() =>this.confirmOrderTask(6)}>Mark as Complete<Icon left>done_outline</Icon></Button>  
                             }
                             </div>
                  </div>
+                 <div className="messages text-center">Total Amount  &#8377; { order.grand_total}</div>
                      <Tab.Container className="tab" defaultActiveKey="first" id="mytab">
                     <Row className="clearfix">
                         <Col sm={2} lg={2} >
@@ -146,7 +147,9 @@ render(){
                             <NavItem eventKey="first" onClick ={this.handlePageTitle}>Information</NavItem>
                             <NavItem eventKey="second" onClick ={this.handlePageTitle}>Medicine List</NavItem>
                             <NavItem eventKey="third" onClick ={this.handlePageTitle}>Invoices</NavItem>
+                            { order.prescription &&
                             <NavItem eventKey="fourth" onClick ={this.handlePageTitle}>Prescriptions</NavItem>
+                            }
                             <NavItem eventKey="five" onClick ={this.handlePageTitle}>Delivery</NavItem>
                             <NavItem eventKey="sixth" onClick ={this.handlePageTitle}>Talk History</NavItem>
                         </Nav>

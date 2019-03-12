@@ -9,7 +9,7 @@ class SimpleSlider extends React.Component {
 
   componentDidMount(){
   fetch('/api/banners/list')
-        .then(res => res.json())
+        .then(res => res.json() )
         .then(result =>{
           this.setState({banners : result})
           console.log(result);

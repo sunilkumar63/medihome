@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import withLoader  from '../../components/LoaderHoc'
+import { Button, Icon} from 'react-materialize';
+import {formatPrice} from '../../helper/data'
 
 class OrderGrid extends React.Component{
     constructor(){
@@ -11,11 +13,6 @@ class OrderGrid extends React.Component{
 
     componentDidMount(){
         document.title = "Order Grid"
-        // // console.log(fetchOrderStatus())
-        // fetch('/api/orders')
-        // .then(res => res.json())
-        // .then(orders => this.setState({orders : orders,loader: false }))
-        // .catch(err => console.error(err))
 }
 editRow=(order_id) =>{
     this.props.history.push('/admin/order/'+order_id)
@@ -30,8 +27,8 @@ editRow=(order_id) =>{
                         <h4 className ="page-title">Manage Orders </h4>
                     </div>
                     <div className="control-wrapper">
-                    <ul className="options inline">
-                        <li><button className="btn waves-effect waves-light"><Link to="#">Add Order</Link></button></li>
+                    <ul className="options inline">                     
+                        <li><Link to ="/admin/new/order"><Button  floating large className='' waves='light' icon='add' >Add Order</Button></Link></li>
                     </ul>
                     </div>
                 </div>
@@ -44,7 +41,7 @@ editRow=(order_id) =>{
                     <tbody>
                         { orders.map( (order,index) => { 
                             let medicines =  order.medicines
-                            return (<tr onClick={ () =>this.editRow(order.id)} key={index}><td>{order.id}</td><td>{order.customer[0].full_name}</td><td>{order.grand_total_currency}</td><td>{medicines.length}</td><td>{order.status_label}</td><td><Link to={ "/admin/order/"+order.id } >View</Link></td></tr>)
+                            return (<tr onClick={ () =>this.editRow(order.id)} key={index}><td>{order.id}</td><td>{order.customer[0].full_name}</td><td>{formatPrice(order.grand_total)}</td><td>{medicines.length}</td><td>{order.status_label}</td><td><Link to={ "/admin/order/"+order.id } >View</Link></td></tr>)
                         }) 
                         } 
                     </tbody>

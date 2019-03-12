@@ -33,12 +33,12 @@ router.get('/api/orders/:type?' , async (req, res , next) =>{
         res.json(data)
     }
 })
+
 router.get('/api/order/updatestatus/:id/:status' , async (req, res , next) =>{   
     var is_updated = await order_api.updateStatus(req.params.id,req.params.status)
     if(is_updated) res.send(true)
     else res.send(false)
 })
-
 router.post('/api/order/:id/ship' , async (req, res , next) =>{   
     var is_updated = await order_api.shipOrder(req.body)
     if(is_updated) res.send(true)
