@@ -3,7 +3,7 @@ let moment = require('moment');
 let timestampPlugin = require('../plugins/timestamp')
 var AutoIncrement  = require('mongoose-sequence')(mongoose);
 
-let statuses = { 1 : 'pending' , 2 : 'preparation' , 3: 'shipped' , 4 : 'hold',5 : 'unhold', 6 : 'complete' , 0 : 'cancel' }
+let statuses = { 1 : 'pending' , 2 : 'preparing' , 3: 'shipped' , 4 : 'hold',5 : 'unhold', 6 : 'completed' , 0 : 'cancelled' }
 var schema  = new mongoose.Schema({
     customer_id : Number,//{ type : mongoose.Schema.Types.ObjectId, ref : "Customers"},
     items :  {type : String , default : null},

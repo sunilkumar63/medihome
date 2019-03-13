@@ -19,6 +19,6 @@ export async function shipOrder(order_data,callback) {
 }
 
 export async function fetchOrderStatus(id,callback) {
-	let status = [{ 0 : 'pending' , 1 : 'preparation' , 3: 'shipped' , 4 : 'hold', 5 : 'complete' , 0 : 'cancel'}]
+	let status = [{ 0 : 'pending' , 1 : 'preparing' , 3: 'shipped' , 4 : 'hold', 5 : 'completed' , 0 : 'cancelled'}]
 	callback(status[id])
 }

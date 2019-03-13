@@ -6,9 +6,13 @@ var order_api =  require('../models/api/order')
 
 router.post('/admin/config/save' , (req,res,next) =>{
     admin_api.saveConfig(req.body).then(result => res.json(result)).catch(err => res.json(false)) 
-})
-router.get('/admin/config/fetch' , (req,res,next) =>{
-    admin_api.getAllConfig().then( configs => res.send(configs))
+})  
+router.post('/admin/config/fetch' , (req,res,next) =>{ 
+    var count = Object.keys(req.query).length;
+    if(count === 0)
+        admin_api.getAllConfig().then( configs => res.send(configs))
+     else
+        admin_api.getConfig(req.query).then( configs => res.send(configs))
 })
 router.post('/api/admin/login' , (req, res , next) =>{
     admin_api.authLogin(req.body)

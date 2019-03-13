@@ -126,7 +126,7 @@ render(){
                             {  status == 0 && status !== 3 &&
                             <Button waves='teal' className ="red"  onClick={() =>this.confirmOrderTask(2)}>Undo Cancel<Icon left></Icon></Button>
                             }
-                            { (status !== 4 && status !== 5 && status !== 6 && order.status >= 3 && status !== 0)   &&
+                            { (status !== 4 && status !== 5 && status !== 6 && order.status != 3 && status !== 0)   &&
                             <Button waves='yellow' className ="light"  onClick={() =>this.confirmOrderTask(4)}>Hold<Icon left>cancel</Icon></Button> 
                             }
                             {  status === 4 &&
@@ -151,9 +151,7 @@ render(){
                             { order.prescription &&
                             <NavItem eventKey="fourth" onClick ={this.handlePageTitle}>Prescriptions</NavItem>
                             }
-                            {/* { status ==3 ||  status ==6 && */}
                             <NavItem eventKey="five" onClick ={this.handlePageTitle}>Shipment</NavItem>
-                            {/* } */}
                             <NavItem eventKey="sixth" onClick ={this.handlePageTitle}>Talk History</NavItem>
                         </Nav>
                         </Col>

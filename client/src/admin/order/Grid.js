@@ -34,14 +34,14 @@ editRow=(order_id) =>{
                 </div>
                 <div className = "grid-container">
                 { orders && 
-                    <table className="table-hover table">
+                    <table className="table-hover table grid-table">
                     <thead>
                         <tr><td>#</td><td>Customer Name</td><td>Grand Total</td><td>Medicines</td><td>Status</td><td>Actions</td></tr>
                     </thead>
                     <tbody>
                         { orders.map( (order,index) => { 
                             let medicines =  order.medicines
-                            return (<tr onClick={ () =>this.editRow(order.id)} key={index}><td>{order.id}</td><td>{order.customer[0].full_name}</td><td>{formatPrice(order.grand_total)}</td><td>{medicines.length}</td><td>{order.status_label}</td><td><Link to={ "/admin/order/"+order.id } >View</Link></td></tr>)
+                            return (<tr onClick={ () =>this.editRow(order.id)} key={index}><td>{order.id}</td><td>{order.customer[0].full_name}</td><td>{formatPrice(order.grand_total)}</td><td>{medicines.length}</td><td className={ "status "+order.status_label }>{order.status_label}</td><td><Link to={ "/admin/order/"+order.id } >View</Link></td></tr>)
                         }) 
                         } 
                     </tbody>

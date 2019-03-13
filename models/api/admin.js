@@ -19,7 +19,18 @@ module.exports.getAllConfig =() => {
     configModel.find({}).then(configs => resolve(configs)).catch(err =>{ console.log(err); reject(false) })
     })
 }
-
+module.exports.getConfig =(params) => {
+    return new Promise( (resolve,reject) => {
+    configModel.findOne({section_id : params.section_id}).then( config =>{
+                    var config_data = JSON.parse(config.values);
+                    if(params.field_name) 
+                        resolve(config_data[params.field_name])
+                     else
+                        resolve(false)   
+                })
+            .catch(err =>{ console.log(err); reject(false) })
+    })
+}
 module.exports.authLogin =  (data) =>{
     return new Promise( (resolve , reject) =>{
     Admin.findOne({ mobile_no : data.mobile_no,password: data.password}).then( res =>{          
