@@ -148,7 +148,7 @@ render(){
                             <NavItem eventKey="first" onClick ={this.handlePageTitle}>Information</NavItem>
                             <NavItem eventKey="second" onClick ={this.handlePageTitle}>Medicine List</NavItem>
                             <NavItem eventKey="third" onClick ={this.handlePageTitle}>Invoices</NavItem>
-                            { order.prescription &&
+                            { //order.prescription &&
                             <NavItem eventKey="fourth" onClick ={this.handlePageTitle}>Prescriptions</NavItem>
                             }
                             <NavItem eventKey="five" onClick ={this.handlePageTitle}>Shipment</NavItem>

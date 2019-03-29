@@ -10,7 +10,8 @@ import axios from 'axios';
  constructor(props){
         super(props);
         this.state = {
-            isAuthenticated : false
+            isAuthenticated : false,
+            header_content : null
         }
         // this.authAdmin =  this.authAdmin.bind(this);
         this.logout =  this.logout.bind(this);
@@ -28,6 +29,11 @@ import axios from 'axios';
                 localStorage.setItem("isAuthenticated",true)
             }
     })
+    fetch('/admin/basic/info')
+        .then(res =>res.json())
+        .then( data => {
+            this.setState({header_content : data});
+        })    
 }
 
     logout = () => {
@@ -45,14 +51,15 @@ import axios from 'axios';
                 marginLeft : 0,
                 background: "none"
         }
-        const {isAuthenticated} = this.state;
-        var isAuth = localStorage.getItem("isAuthenticated")
+        const {isAuthenticated, header_content} = this.state;
+        var isAuth = localStorage.getItem("isAuthenticated")        
         return (
+            header_content &&
             <header className="main-header header"><img src={logo} width="50px"></img>
               {/* if(!isAuth) <Redirect to ="/admin/login"></Redirect>  */}
                 <a href="/admin" className="logo">                
-                    <span className="logo-mini"><b>Medi</b>Home</span>
-                    <span className="logo-lg"><b>Medi</b>Home</span>
+                    <span className="logo-mini"><b>{header_content .page_title}</b></span>
+                    <span className="logo-lg"><b>{header_content .page_title}</b></span>
                 </a>`
                 <nav className="navbar navbar-static-top" style={navStyle}>
                     <a href="#" className="sidebar-toggle" data-toggle="push-menu" role="button">

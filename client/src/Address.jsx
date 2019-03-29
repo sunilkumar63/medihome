@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import Popup from "reactjs-popup";
 import Flash from "./components/Flash";
 import {Alert} from 'react-bootstrap';
-import { Col,Preloader,ProgressBar } from 'react-materialize';
+import { Col,Button,ProgressBar } from 'react-materialize';
 import {
     Form,
     Input,
@@ -67,8 +67,8 @@ class Address extends React.Component {
     const {addresses} = this.state;
     return (
             <div className="view address-grid" id="address">
-               <div className="upload-btn" style={uploadStyle}>
-                    <Popup open={this.state.open} trigger={ <button className="bt" onClick={this.resetForm}>Add Address</button>} modal closeOnDocumentClick  >
+               <div className="upload-btn" >  
+                    <Popup open={this.state.open} trigger={ <Button  waves='teal' className ="light" onClick={this.resetForm}><i className="material-icons">home</i>Add Address</Button>} modal closeOnDocumentClick  >
                     {close => (
                             <div className="box-popup content form ">
                                 <div className="title">Address Form</div>
@@ -131,7 +131,8 @@ class Address extends React.Component {
                     )}
                     </Popup>
                     </div>
-                    { addresses ?
+                    
+                    { addresses  &&  addresses.length > 0 ?
                         <div className="grid-square">
                        { addresses.map( (address,index) => { 
                                 return(

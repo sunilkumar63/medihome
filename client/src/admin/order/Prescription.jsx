@@ -13,7 +13,7 @@ class Prescription extends React.Component {
 render(){
         var prescription = this.props.prescription;
         return (
-            !prescription ? <Loader /> : 
+            !prescription ? <h5>No prescription available</h5> : 
             <div className="tab-view"> 
             <div className="block">                        
                     <div className="title text-center">Prescription Information</div>              

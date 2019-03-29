@@ -1,6 +1,6 @@
 
 export function formatPrice(price, callback) {
-	return  "\u20B9 "+price
+	return  "\u20B9"+price
 }
 export function getConfigValue(section_id,field_name) {
 	var data = {section_id: "general" , field_name : field_name}

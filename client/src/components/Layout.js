@@ -10,7 +10,7 @@ const DefaultLayout = ({component: Component, ...rest}) => {
           <div className="front-wrapper">
               <Header />
               <Component {...matchProps} />          
-              {/* <Footer /> */}
+              <Footer />
           </div>
         )} />
     )

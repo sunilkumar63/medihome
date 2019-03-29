@@ -19,6 +19,7 @@ class Login extends React.Component {
           isLoggedIn: false,
           error : false
         }
+        document.title = "Medihome - Login"
       }
     componentDidMount(){
         $('.footer').hide();
@@ -34,6 +35,7 @@ submit = (data) =>{
      .then( rs => rs.json())
      .then(result =>{ 
          if(!result ) {
+           // window.Materialize.toast('Incorrect Credentials', 5000) 
              this.setState({ isLoggedIn : false, error : true  }); 
          }
         else{
@@ -59,7 +61,7 @@ render() {
                 <Input
                         name="mobile_no"                        
                         placeholder="Mobile No"
-                        value = "11112222"
+                        value = ""
                         validation={ValidationTypes.Number}
                         missingMessage="This field is required."
                         isRequired
@@ -72,7 +74,7 @@ render() {
                         isRequired
                         />                              
                 </Form>
-                <Link to="/register"><button className="no-margin"><i className="fa fa-email"></i>Sign Up</button> </Link>
+                <Link to="/customer/register"><button className="no-margin"><i className="fa fa-email"></i>Sign Up</button> </Link>
                 <div className="social"> <span>or sign up with social media</span></div>
                 <div className="buttons">
                     <button className="facebook"><i className="fa fa-facebook"></i>Facebook</button>

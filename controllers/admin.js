@@ -14,6 +14,10 @@ router.post('/admin/config/fetch' , (req,res,next) =>{
      else
         admin_api.getConfig(req.query).then( configs => res.send(configs))
 })
+router.get('/admin/basic/info' , async (req,res,next) =>{ 
+    var data = await admin_api.getBasicConfig();
+    res.json(data);
+})
 router.post('/api/admin/login' , (req, res , next) =>{
     admin_api.authLogin(req.body)
                         .then( data =>{ 

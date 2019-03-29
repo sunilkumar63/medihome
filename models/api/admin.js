@@ -31,6 +31,18 @@ module.exports.getConfig =(params) => {
             .catch(err =>{ console.log(err); reject(false) })
     })
 }
+module.exports.getBasicConfig =(params) => {
+    return new Promise( (resolve,reject) => {
+    configModel.findOne({section_id : 'general'}).then( config =>{
+                    var config_data = JSON.parse(config.values);
+                    if(config_data) 
+                        resolve(config_data)
+                     else
+                        resolve(false)   
+                })
+            .catch(err =>{ console.log(err); reject(false) })
+    })
+}
 module.exports.authLogin =  (data) =>{
     return new Promise( (resolve , reject) =>{
     Admin.findOne({ mobile_no : data.mobile_no,password: data.password}).then( res =>{          

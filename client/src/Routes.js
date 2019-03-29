@@ -8,6 +8,7 @@ import DefaultLayout from './components/Layout'
 import AdminLayout from './admin/components/AdminLayout'
 import Upload from './UploadForm.jsx' 
 import Myaccount from './Myaccount.jsx'  
+import OrderItems from './OrderItems.jsx'  
 import Prescription from './Pres.jsx'  
 import Success from './Success.jsx'  
 import noroute from './404.jsx'  
@@ -45,6 +46,7 @@ const Routes = () => (
                     <DefaultLayout exact path='/customer/register' component={Register} />
                     <DefaultLayout exact path='/upload' component={Upload} />
                     <DefaultLayout exact path='/customer/account' component={Myaccount} />
+                    <DefaultLayout exact path='/customer/order/:order_id' component={OrderItems} />
                     <DefaultLayout exact path='/customer/prescription' component={Prescription} />
                     <DefaultLayout exact path='/order/success' component={Success} />                    
                      <AdminLayout exact path="/admin/" component={admin_dash} />                     

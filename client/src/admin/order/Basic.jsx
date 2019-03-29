@@ -22,7 +22,7 @@ class Basic extends React.Component {
                         <div className="title"><i class="material-icons">whatshot</i>Order Information</div>
                         <div className="sub"><div><span className="label">Order ID</span> {order.id}</div></div>
                         <div className="sub"><div><span className="label">Order Date</span> {order.purchased_date}</div></div>
-                        <div className="sub"><div><span className="label">Order Status</span> {order.status_label}</div></div>
+                        <div className="sub"><div><span className="label">Order Status</span><b> {order.status_label}</b></div></div>
                     </div>
                 </Col>
                 <Col sm={6} lg={6}>

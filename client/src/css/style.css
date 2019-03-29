@@ -17,6 +17,7 @@ img{
 .main-container ,.front-wrapper{
   margin: 0 auto;
   min-height: 100%;
+  /* padding: 10px; */
 }
 .content-wrapper{
 background: none;
@@ -47,11 +48,15 @@ nav a.sidebar-toggle{
   display: block;
   background-size: cover;
 }
+.front-wrapper {
+background: #fbfbfb;
+}
 .front-wrapper::before{
-  background: url("../images/bg2.jpg");
+  /* background: url("../images/bg2.jpg"); */
+  background: #ffffff2e !important;
   width: 100%;
   /* height: 100vh; */
-  filter: blur(20px);
+  /* filter: blur(90px); */
   content: "";
   position: fixed;
   left: 0;
@@ -65,7 +70,9 @@ nav a.sidebar-toggle{
 header > div { 
   vertical-align: middle;
 }
+.view .page, .page{
 
+}
 .messages {
   background: #EAEDE0;
     padding-left: 10px;
@@ -78,12 +85,12 @@ header > div {
   transition: all 0.5s ease-in-out;
 }
 .view{
-  position: relative;
+
 }
 .view .page ,.page{
-  background: #ffff;
+  background: #ffffff2e;
   padding: 10px;
-  width: 98%;
+  width: 80%;
   margin: 0 auto;
   color: black;
   border-radius: 15px;
@@ -218,22 +225,39 @@ button.menu.active {
   color: black;
 }
 .footer{
-  padding: 5px;
+  margin-top:10px;
   width : 100%;
-  color: white;
+  color: black;
   text-align: center;
-  /* position:absolute; */
   bottom:0;
   width:100%;
-  height:60px;
-  background: #19c880;
-  opacity: 0.7;
+  /* height:60px; */
+  /* background: lightgray; */
 }
-.footer > div{ 
-display:inline-block;
+
+.footer-wrapper{
+  height: 120px;
+  padding: 5px 10px 5px 10px;
 }
+header, .header, .footer{
+  background:#cbead796;
+}
+
  .order-form label{
   color: #fff;
+}
+.order-details > div{
+  margin: 10px 0px 10px 0px;
+  border-bottom: 1px solid gray;
+}
+.order-details .title{
+  font-size: 18px;
+}
+.order-details .head{
+  font-size: 20px;
+}
+.tab-content a{
+  color : white;
 }
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
   color: #fff;
@@ -337,9 +361,9 @@ padding:15px;
   flex-wrap: wrap;
 }
 .grid-square .item{
-    padding: 10px;
+    padding: 4px;
     width: 22%;
-    background: darkseagreen;
+    /* background: darkseagreen; */
     text-align: center;
     position: relative;
     text-transform: capitalize;

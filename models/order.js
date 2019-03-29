@@ -35,7 +35,7 @@ schema.virtual('status_label')
 
 schema.virtual('purchased_date')
 .get(function () {
-   return moment(this.createdAt).format('MMMM Do YYYY, h:mm a')
+   return moment(this.createdAt).format('MMMM Do YYYY h:mm A')
 });
 
 schema.virtual('ship_address', {

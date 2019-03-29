@@ -9,8 +9,8 @@ import {
   require('./css/customer.css');
 
 class Register extends React.Component {
-
     componentDidMount(){
+        document.title = "Medihome - Sign Up"
         $('.footer').hide();
     }
     props =  this.props;
@@ -24,6 +24,7 @@ class Register extends React.Component {
           })
           .then( rs => rs.json())
           .then(result => {
+            window.Materialize.toast('You have successfully sign up.', 5000) 
               this.setState({isLoggedIn :true })
               this.props.history.push('/customer/login')
              })
@@ -67,25 +68,14 @@ render() {
                         // validation={ValidationTypes.email}  
                         placeholder="Email Address"
                         /> 
-                    <Input
-                    name="city"                        
-                    placeholder="City"
-                    missingMessage="This field is required."
-                    isRequired
-                    />    
-                    <Input
-                    name="shipping_address"                        
-                    placeholder="Shipping Address"
-                    missingMessage="This field is required."
-                    isRequired
-                    />    
+                     
                 </Form>
-                <div className="social"> <span>or sign up with social media</span></div>
-                <div className="buttons">
+                {/* <div className="social"> <span>or sign up with social media</span></div> */}
+                {/* <div className="buttons">
                     <button className="facebook"><i className="fa fa-facebook"></i>Facebook</button>
                     <button className="google"><i className="fa fa-google-plus"></i>Google</button>
-                </div>
-                         <div className="already">Already have an account? <Link to="/login">Sign In</Link></div>
+                </div> */}
+                         <div className="already">Already have an account? <Link to="/customer/login">Sign In</Link></div>
                 </div>
         </div>
     )

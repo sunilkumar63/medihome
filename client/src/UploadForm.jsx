@@ -101,11 +101,13 @@ submit = (event) =>{
           top:"10px",
           left:"5px"
       }
+      if(addresses && addresses.length == 0)
+        alert("ohh !! No shipping address available. Add a shipping address first")
     return (
         addresses &&
         <div className="view">            
         <div className="box-lg content form text-center">
-        <Button waves='light' style={backStyle} onClick={() => this.props.history.goBack()}>Back<Icon left>replay</Icon></Button>
+        <Button waves='teal' style={backStyle} onClick={() => this.props.history.goBack()}>Back<Icon left>replay</Icon></Button>
         
             <div className="title">New Order</div>
                 <div className="info text-center">
@@ -118,6 +120,7 @@ submit = (event) =>{
                 <Row>
                 <Input l={6} label="Name/Title" placeholder="" name="name" validate required><Icon>account_circle</Icon></Input>
                 <Input l={12}  type='select' label="Choose Shipping Address" placeholder="" name="shipping_address" defaultValue="" required>
+                <option value="">-- select shipping address --</option>
                     { addresses.map((address,index) => {
                                 return <option  key={address.id} value={address.id} >{address.name},{address.city},{address.address}</option>
                                 })
@@ -126,7 +129,7 @@ submit = (event) =>{
                 <Input type='textarea' label="Message, If Any" placeholder="" name='message' icon="email" />
                 
                 </Row>
-                <Button  type='submit' className="green"  large waves='green' >Place Order</Button>
+                <Button type="submit" waves='teal' className ="light">Place Order</Button>
                 { loading &&     <Preloader size='small' flashing/>   }
                 </form>
             </div>          
