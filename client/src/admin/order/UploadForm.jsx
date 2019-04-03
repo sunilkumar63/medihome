@@ -1,11 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import axios from 'axios';
-// import {Link} from 'react-router-dom';
 import withLoader  from '../../components/LoaderHoc'
 import FileUpload from '../../components/FileUpload';
-// import Alert from '../../components/Alert'
 import {
     Form1,
     Inpu1t,
@@ -130,7 +126,7 @@ submit = (event) =>{
         <div className="text-center col-sm-8 col-lg-8">
                 <div className="info text-center ">
                     <div className ="t1">Please Upload your prescription and type some comment , if any</div>
-                    <div className ="t2 red">Prescription should be a image and in jpg,png or jpeg format.</div>
+                    <div className ="t2"><b>Prescription should be a image and in jpg,png or jpeg format.</b></div>
                 </div>
                 
                 <FileUpload file = {this.handleselectedFile} isDragActive="true" required ="true" />
@@ -159,7 +155,7 @@ submit = (event) =>{
                 <Row>
                 <Input type='textarea' label="Message, If Any" placeholder="" name='message' icon="email" />
                 </Row>
-                <Button  type='submit' className="green"  large waves='green' >Place Order</Button>
+                <Button  type='submit' className="red" ><Icon left>shopping_cart</Icon> Place Order</Button>
                 { loading &&     <Preloader size='small' flashing/>   }
                 </form>
                 </div>

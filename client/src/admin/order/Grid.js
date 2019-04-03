@@ -7,34 +7,47 @@ import {formatPrice} from '../../helper/data'
 class OrderGrid extends React.Component{
     constructor(){
         super();
-        this.state = {orders : null}
+        this.state = {orders : null , stats : null}
         this.editRow = this.editRow.bind(this)
     }
 
     componentDidMount(){
         document.title = "Order Grid"
-}
-editRow=(order_id) =>{
-    this.props.history.push('/admin/order/'+order_id)
-}
+        fetch('/api/order_stats').then(data => data.json()).then(stats => this.setState({stats : stats }))
+    }
+    editRow=(order_id) =>{
+        this.props.history.push('/admin/order/'+order_id)
+    }
     render(){
         const {orders} = this.props;
+        const {stats} = this.state;
+        if(stats == null)  return null;
          return(
-            orders &&
+            orders && stats &&   
             <div className="view content-wrapper">               
                 <div className="page-head cleafix">
-                    <div className="title-wrapper">
-                        <h4 className ="page-title">Manage Orders </h4>
+                  <div className="clearfix titlebar">
+                        <div className="title-wrapper col-lg-5 col-sm-5">
+                            <h4 className ="page-title">Manage Orders </h4>
+                        </div>
+                        <div className="control-wrapper">
+                            <ul className="options inline">                     
+                                <li><Link to ="/admin/new/order"><Button  floating large className='' waves='light' icon='add' >Add Order</Button></Link></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div className="control-wrapper">
-                    <ul className="options inline">                     
-                        <li><Link to ="/admin/new/order"><Button  floating large className='' waves='light' icon='add' >Add Order</Button></Link></li>
-                    </ul>
+                    <div className="stats col-sm-12 col-lg-12">
+                      <div className="item"><span className="label label-success">{stats.pending}</span>New</div>
+                      <div className="item"><span className="label label-primary">{stats.preparing}</span>Preparing </div>
+                      <div className="item"><span className="label label-danger">{stats.cancelled}</span>Cancelled </div>
+                      <div className="item"><span className="label label-warning">{stats.shipped}</span>Shipped </div>
+                      <div className="item"><span className="label label-warning">{stats.hold}</span>Hold </div>
                     </div>
                 </div>
-                <div className = "grid-container">
+                
+                <div className = "grid-container">                
                 { orders && 
-                    <table className="table-hover table grid-table">
+                    <table className="table-hover table responsive">
                     <thead>
                         <tr><td>#</td><td>Customer Name</td><td>Grand Total</td><td>Medicines</td><td>Order Date</td><td>Status</td><td>Actions</td></tr>
                     </thead>

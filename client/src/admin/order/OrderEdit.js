@@ -140,7 +140,7 @@ render(){
                             }
                             </div>
                  </div>
-                 <div className="messages text-center">Total Amount  &#8377; { order.grand_total}</div>
+                 <div className="messages text-center">Total Amount &#8377; { order.grand_total}</div>
                      <Tab.Container className="tab" defaultActiveKey="first" id="mytab">
                     <Row className="clearfix">
                         <Col sm={2} lg={2} >
@@ -148,9 +148,7 @@ render(){
                             <NavItem eventKey="first" onClick ={this.handlePageTitle}>Information</NavItem>
                             <NavItem eventKey="second" onClick ={this.handlePageTitle}>Medicine List</NavItem>
                             <NavItem eventKey="third" onClick ={this.handlePageTitle}>Invoices</NavItem>
-                            { //order.prescription &&
                             <NavItem eventKey="fourth" onClick ={this.handlePageTitle}>Prescriptions</NavItem>
-                            }
                             <NavItem eventKey="five" onClick ={this.handlePageTitle}>Shipment</NavItem>
                             <NavItem eventKey="sixth" onClick ={this.handlePageTitle}>Talk History</NavItem>
                         </Nav>

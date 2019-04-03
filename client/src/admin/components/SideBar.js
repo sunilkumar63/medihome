@@ -45,7 +45,8 @@ handleContentNav = () => {
                              <i className="material-icons md-36">account_circle</i>
                                 <span>Customer</span>
                                 <span className="pull-right-container">
-                                <span className="label label-primary pull-right">4</span>
+                                {/* <span className="label label-primary pull-right">4</span> */}
+                                <i className="fa fa-angle-left pull-right"></i>
                                 </span>
                             </Link>
                             <ul className={"treeview-menu "+showCls} style ={style}>

@@ -35,7 +35,7 @@ getOrder : async (id,entity) =>{
     return new Promise( (resolve, reject) => {
     var order =  OrderModel.findOne({id : id})
     if(entity == 'all') { 
-        order.populate('medicines') ; order.populate('ship_address', {updatedAt:0 , createdAt :  0, _id : 0 });order.populate('prescription');order.populate('chat_history').populate('customer','first_name last_name') 
+        order.populate('medicines') ; order.populate('ship_address', {updatedAt:0 , createdAt :  0, _id : 0 });order.populate('prescription');order.populate('chat_history').populate('customer','first_name last_name email_address mobile_no') 
      }
     if(entity !== null && entity !== 'all')  order.populate(entity)
     if(order) resolve(order)
@@ -47,12 +47,12 @@ getOrders : (params) =>{
     return new Promise( async (resolve, reject) => {
                     if(params.type === 'recent') 
                         orders = await OrderModel.find().limit(5)
-                        .populate('customer','first_name last_name')
+                        .populate('customer','first_name last_name email_address')
                         .then(result => resolve(result))
                         .catch(err => { console.log(err); reject(false) })
                     else
                        orders = await OrderModel.find().sort('-date')
-                        .populate('customer','first_name last_name')
+                        .populate('customer','first_name last_name email_address')
                         .then(result => resolve(result))
                         .catch(err => { console.log(err); reject(false) })
     })
@@ -118,14 +118,14 @@ updateStatus : (id , status_code) =>{
                                  'status' : 3
                                 }  , {upsert:false} )
                                 .then(order =>{
-                                    //send Email             
-                                    CustomerModel.findOne({id : order.customer_id}).select('email_address first_name mobile_no').then(customer=>{
+                                        //send Email             
+                                        CustomerModel.findOne({id : order.customer_id}).select('email_address first_name mobile_no').then(customer=>{
                                         order.customer = customer;                                      
-                                        sender.orderShipmentEmail(order)
-                                        resolve(order)
+                                        sender.orderShipmentEmail(order);
+                                        console.log("sending email")
                                     })   
                                     //estimate Delivery TIme
-                                    
+                                    resolve(order)
                                     })
                                 .catch(err => console.log("Shipment LOG : ",err))
     })
@@ -143,6 +143,50 @@ updateStatus : (id , status_code) =>{
         if(order.status !== 2)  cb(true) 
         else cb(false)
     })
-}
+},
 
+getStats : async (cb) =>{
+    var stats_arr = {}
+    var pending_count = await OrderModel.find({status : 1}).exec();
+    stats_arr['pending'] = pending_count.length;
+    var stats_arr = {}
+    var pending_count = await OrderModel.find({status : 1}).exec();
+    stats_arr['pending'] = pending_count.length;
+    var preparing_count = await OrderModel.find({status : 2}).exec();
+    stats_arr['preparing'] = preparing_count.length;
+    var preparing_count = await OrderModel.find({status : 2}).exec();
+    stats_arr['preparing'] = preparing_count.length
+    var shipped_count = await OrderModel.find({status : 3}).exec();
+    stats_arr['shipped'] = shipped_count.length
+    var completed_count = await OrderModel.find({status : 6}).exec();
+    stats_arr['completed'] = completed_count.length
+    var hold_count = await OrderModel.find({status : 4}).exec();
+    stats_arr['hold'] = hold_count.length
+    var can_count = await OrderModel.find({status : 0}).exec();
+    stats_arr['cancelled'] = can_count.length
+    return new Promise((resolve, reject) =>{
+        resolve(stats_arr)
+    })
+},
+getStatistics : async (cb) =>{
+    var stats_arr = {}
+    var pending=preparing=shipped=hold=cancelled=completed = 0;
+    var all_orders = await OrderModel.find().exec();
+   var count_cal  = await function (){ 
+                all_orders.forEach(order =>{
+                    let status = parseInt(order.status); 
+                    if(status  == 1) pending++;
+                    if(status  == 2) preparing++
+                    if(status  == 3) shipped++
+                    if(status  == 4) hold++
+                    if(status  == 0) cancelled++
+                    if(status  == 6) completed++
+                })
+}
+await count_cal();
+stats_arr = {pending : pending , preparing : preparing,shipped : shipped , hold : hold ,cancelled : cancelled , completed : completed}
+return new Promise((resolve, reject) =>{
+    resolve(stats_arr)
+})
+}
 }

@@ -68,14 +68,37 @@ form input:hover{
 }
 .page-head .title-wrapper{
     /* width: 30%; */
-    float: left;
+    /* float: left; */
     max-width: 30%;
+}
+.page-head .titlebar{
+    width: 100%;
 }
 .page-head .control-wrapper{
     float: right;
     margin-right: 20px;
     /* display: flex; */
-max-width: 72%;
+    max-width: 72%;
+}
+.page-head .stats{
+    background: #ffffff;
+    border:1px solid burlywood;
+    height : 50px;
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+.page-head .stats .item{
+    width: 15%;
+    padding: 10px;
+}
+.page-head .stats .item{
+    margin-right: 5px;
+}
+.page-head .stats .item > span{
+font-size: 15px;
+margin-right: 5px;
 }
 .block{
     padding: 0;
@@ -121,9 +144,12 @@ form[name=msg-box] textarea{
 padding: 5px;
 }
 .dashview .block .title,.tab-view .block .title{
-background: #ffff;
-border-bottom: 2px solid #ddd;
-padding: 5px;
+    background: #E9ECDE;
+    border: 2px solid white;
+    padding: 5px;
+}
+header, .header, .footer{
+    /* background: none; */
 }
 .profile-grid .view-wrapper{
     display: flex ;

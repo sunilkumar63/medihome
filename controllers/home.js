@@ -2,8 +2,7 @@ let express = require('express');
 let path = require('path');
 let router = express.Router();
 var customer_api = require('../models/api/provider') 
-var chat_historyModel = require('../models/chat_history') 
-
+var redis  = require('../helpers/cache')
 var order_api = require('../models/api/order')
 var multer = require('multer'); 
 var Storage = multer.diskStorage({
@@ -39,10 +38,7 @@ router.post('/api/customer/login' , (req, res , next) =>{
 router.get('/api/customer/logout', function (req,res) {
     if (req.session) { 
         delete req.session;
-        // req.session.destroy(function (err,op) {  
-           res.send(true)
-        //    req.session = null;
-        // });
+        if(!req.session)  res.send(true)
     }
 })
 router.get('/api/customer/auth' , (req, res , next) =>{
@@ -56,7 +52,7 @@ router.get('/api/customer/auth' , (req, res , next) =>{
         }
 })
 
-router.get('/api/customer/:id?/:all?' , (req, res , next) =>{
+router.get('/api/customer/:id?/:all?' , redis.redisMiddleware() ,(req, res , next) =>{
     var customer_id;
     if(req.session && !req.params.id) {
         let customer = req.session.customer;
@@ -74,7 +70,7 @@ router.get('/api/customers/active' , (req, res , next) =>{
                     .then(result => res.json(result))
                     .catch(err => res.json(err))
 })
-router.get('/api/customers' , (req, res , next) =>{    
+router.get('/api/customers' , redis.redisMiddleware(),(req, res , next) =>{    
     customer_api.getAllCustomer(req.params)
                     .then(result => res.json(result))
                     .catch(err => res.json(err))

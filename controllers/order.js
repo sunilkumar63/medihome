@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router({ strict: true });
 var order_api = require('../models/api/order')
-
+var redis  = require('../helpers/cache')
 router.get('/api/customer/order/:customer_id?' , (req, res , next) =>{
     var cust_id ;
     if(req.session.customer) {
@@ -27,7 +27,7 @@ router.get('/api/order/:id/:entity?' , async (req, res , next) =>{
                     .catch(err => res.json(err))
 })
 
-router.get('/api/orders/:type?' , async (req, res , next) =>{    
+router.get('/api/orders/:type?' , redis.redisMiddleware() , async (req, res , next) =>{    
     var data = await order_api.getOrders(req.params)
     if(data){
         res.json(data)
@@ -44,10 +44,9 @@ router.post('/api/order/:id/ship' , async (req, res , next) =>{
     if(is_updated) res.send(true)
     else res.send(false)
 })
+router.get('/api/order_stats' , async (req,res,next) =>{ 
+    var data = await order_api.getStatistics();
+    res.json(data);
+})
 
-// router.get('/api/order/chat_history/:id' , async (req, res , next) =>{   console.log("entered") 
-//     var response = await order_api.getChatHistory(req.params.id)
-//     if(response) res.send(true)
-//     else res.send(false)
-// })
 module.exports = router;

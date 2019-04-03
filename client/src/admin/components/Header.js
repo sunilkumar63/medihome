@@ -50,9 +50,10 @@ import axios from 'axios';
         const navStyle ={
                 marginLeft : 0,
                 background: "none"
-        }
+        }       
         const {isAuthenticated, header_content} = this.state;
         var isAuth = localStorage.getItem("isAuthenticated")        
+        if(header_content == null) return null;
         return (
             header_content &&
             <header className="main-header header"><img src={logo} width="50px"></img>

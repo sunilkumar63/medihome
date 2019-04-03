@@ -9,12 +9,9 @@ class Basic extends React.Component {
         super(props);  
         this.state ={customer:  [] }
     }
-    componentDidMount(){      
-    }
   render() { 
     const {order} = this.props;
     const address =  order.ship_address
-    // console.log(address.address)
     return (
             <div className="tab-view">
                 <Col sm={6} lg={6}>
@@ -28,8 +25,10 @@ class Basic extends React.Component {
                 <Col sm={6} lg={6}>
                     <div className="block">
                         <div className="title"><i class="material-icons">whatshot</i>Account Information</div>
-                        <div className="sub"><div><span className="label">Customer ID</span> {order.id}</div></div>
+                        <div className="sub"><div><span className="label">Customer #</span> {order.id}</div></div>
                         <div className="sub"><div><span className="label">Name</span> {order.customer[0].full_name}</div></div>
+                        <div className="sub"><div><span className="label email">Email Address</span> {order.customer[0].email_address}</div></div>
+                        <div className="sub"><div><span className="label">Mobile #</span>+91{order.customer[0].mobile_no}</div></div>
                     </div>
                 </Col>
                 {  address &&
