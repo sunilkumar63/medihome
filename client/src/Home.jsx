@@ -7,11 +7,8 @@ constructor(props){
     super(props);
     this.handleNavigation = this.handleNavigation.bind(this)
 }
-componentDidMount(){
-    console.log("dds ",this.props)
-}
+
 handleNavigation(path) {
-   // this.props.history.push(path);
 }
 render() {
     return (  <>

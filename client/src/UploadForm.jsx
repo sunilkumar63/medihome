@@ -1,20 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 // import customer_id from './helper/customer'
 import FileUpload from './components/FileUpload';
 import Alert from './components/Alert'
-import {
-    Form1,
-    Inpu1t,
-    TextAre1a,
-    Select1,
-    ValidationTypes
-  } from "super-easy-react-forms";
-
-  import { Button ,Select, Row, Input , Icon, TextArea,Preloader,Col} from 'react-materialize';
+  import { Button , Row, Input , Icon, Preloader} from 'react-materialize';
   require('./css/customer.css');
 
 class UploadForm extends React.Component {
@@ -35,10 +26,9 @@ class UploadForm extends React.Component {
         .then(res => this.setState({addresses : res.addresses , loader: false}))
         .catch(err => console.error("addr fetch ", err))
         }else{
-            // window.materialize("Invalid Customer" , 5000)
-            this.props.history.push("/")
+            // window.materialize("Login to continue upload" , 5000)
+            this.props.history.push("/customer/login")
         }
-        // $('.footer').hide();
     }
 handleselectedFile = file => {
     this.setState({
@@ -47,7 +37,6 @@ handleselectedFile = file => {
   }
   setShipping  =(event) =>{
       let addr_id = event.target.id
-      console.log(addr_id);
   }
   handleShow() {
     this.setState({ showAlert: !this.state.showAlert });
@@ -78,7 +67,6 @@ submit = (event) =>{
     axios.post('/uploadsave' , data1 )
                         .then(function (response) {                           
                             if(response.statusCode === 500) {
-                                                               
                             }else{
                                 props.history.push({
                                     pathname : "/order/success",
@@ -102,17 +90,16 @@ submit = (event) =>{
           left:"5px"
       }
       if(addresses && addresses.length == 0)
-        alert("ohh !! No shipping address available. Add a shipping address first")
+        alert("Ohh !! No shipping address available. Add a shipping address first")
     return (
         addresses &&
         <div className="view">            
         <div className="box-lg content form text-center">
         <Button waves='teal' style={backStyle} onClick={() => this.props.history.goBack()}>Back<Icon left>replay</Icon></Button>
-        
             <div className="title">New Order</div>
                 <div className="info text-center">
                     <div className ="t1">Please Upload your prescription and type some comment , if any</div>
-                    <div className ="t2 red">Prescription should be a image and in jpg,png or jpeg format.</div>
+                    <div className ="t2">Prescription should be a image and in jpg,png or jpeg format.</div>
                 </div>
                 
                 <FileUpload file = {this.handleselectedFile} isDragActive="true" required ="true" />
@@ -120,14 +107,13 @@ submit = (event) =>{
                 <Row>
                 <Input l={6} label="Name/Title" placeholder="" name="name" validate required><Icon>account_circle</Icon></Input>
                 <Input l={12}  type='select' label="Choose Shipping Address" placeholder="" name="shipping_address" defaultValue="" required>
-                <option value="">-- select shipping address --</option>
+                <option value="">-- Select shipping address --</option>
                     { addresses.map((address,index) => {
                                 return <option  key={address.id} value={address.id} >{address.name},{address.city},{address.address}</option>
                                 })
                     }                  
                 </Input>
                 <Input type='textarea' label="Message, If Any" placeholder="" name='message' icon="email" />
-                
                 </Row>
                 <Button type="submit" waves='teal' className ="light">Place Order</Button>
                 { loading &&     <Preloader size='small' flashing/>   }

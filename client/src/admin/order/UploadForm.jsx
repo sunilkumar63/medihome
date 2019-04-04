@@ -2,14 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import withLoader  from '../../components/LoaderHoc'
 import FileUpload from '../../components/FileUpload';
-import {
-    Form1,
-    Inpu1t,
-    TextAre1a,
-    Select1,
-    ValidationTypes
-  } from "super-easy-react-forms";
-
   import { Button ,Select, Row, Input , Icon, TextArea,Preloader,Col} from 'react-materialize';
   require('../../css/customer.css');
 
@@ -20,22 +12,9 @@ class UploadForm extends React.Component {
         this.handleConfirmation = this.handleConfirmation.bind(this)
         this.submit =  this.submit.bind(this)
         this.setShipping =  this.setShipping.bind(this)
-        this.state = { selectedFile: null,  isConfirm : false, showAlert : false , showThanks : false  , addresses : null }
+        this.state = { selectedFile: null,  isConfirm : false, showAlert : false , showThanks : false  , addresses : [] }
     }
-    
-    componentDidMount(){ 
-        var customer = JSON.parse(localStorage.getItem("customer"));
-        if(customer) {
-        fetch('/api/customer/'+customer.id+'/addresses')
-        .then(data => data.json())
-        .then(res => this.setState({addresses : res.addresses , loader: false}))
-        .catch(err => console.error("addr fetch ", err))
-        }else{
-            // window.materialize("Invalid Customer" , 5000)
-            this.props.history.push("/")
-        }
-        // $('.footer').hide();
-    }
+
 handleselectedFile = file => {
     this.setState({
       selectedFile: file[0]
@@ -43,7 +22,6 @@ handleselectedFile = file => {
   }
   setShipping  =(event) =>{
       let addr_id = event.target.id
-      console.log(addr_id);
   }
   handleShow() {
     this.setState({ showAlert: !this.state.showAlert });

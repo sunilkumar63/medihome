@@ -12,10 +12,10 @@ class SimpleSlider extends React.Component {
         .then(res => res.json() )
         .then(result =>{
           this.setState({banners : result})
-          console.log(result);
         })
   }
   render() {
+
     const {banners} = this.state;
     var settings = {
       dots: false,

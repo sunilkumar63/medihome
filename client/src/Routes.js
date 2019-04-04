@@ -14,7 +14,6 @@ import Success from './Success.jsx'
 import noroute from './404.jsx'  
 import CMS from './Cms.jsx'  
 
-import admin from './admin/Routes'
 import admin_login from './admin/Login.jsx'
 import admin_dash from './admin/Dashboard.jsx'
 import cust_grid from './admin/customer/Grid.jsx';

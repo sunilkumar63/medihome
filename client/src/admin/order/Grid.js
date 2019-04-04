@@ -42,6 +42,7 @@ class OrderGrid extends React.Component{
                       <div className="item"><span className="label label-danger">{stats.cancelled}</span>Cancelled </div>
                       <div className="item"><span className="label label-warning">{stats.shipped}</span>Shipped </div>
                       <div className="item"><span className="label label-warning">{stats.hold}</span>Hold </div>
+                      <div className="item"><span className="label label-warning">{stats.completed}</span>Completed </div>
                     </div>
                 </div>
                 

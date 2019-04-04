@@ -8,7 +8,8 @@ import { Breadcrumb} from 'react-bootstrap';
 class Cms extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { page : null ,page_id : null  }       
+        this.state = { page : null ,page_id : null  }    
+        document.title  =  this.props.page.name;
       }
 
 convertContentFromJSONToHTML = (text) => {

@@ -1,6 +1,6 @@
 .admin-wrapper {
  color: black;  
- /* background: #00a65a2b;  */
+ background: white; 
 }
 form ::placeholder {
   color: white;
@@ -13,12 +13,9 @@ form input:hover{
     border: none !important;
 }
 .admin-wrapper >.header{
-    /* background: #8dca6138; */
-    /* border: 1px solid red; */
-    /* position: fixed; */
+    background: #8dca6138;
     width: 100%;
     height: 60px;
-    /* margin-bottom: 15px; */
 }
 .admin-wrapper a{
     color: black;
@@ -34,8 +31,8 @@ form input:hover{
     background: #F6FAFB !important;
 }
 .main-sidebar{
-    /* background: #8dca6138; */
-    margin-top: 15px;
+    background: #8dca6138;
+    margin-top: 60px;
 }
 .admin-wrapper .view{
     margin-top: 15px;
@@ -193,7 +190,7 @@ html{
     margin-left: 0;
 }
 }
-.med-form input::placeholder{
+input::placeholder{
     color:black;
 }
 

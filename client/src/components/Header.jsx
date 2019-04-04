@@ -1,10 +1,25 @@
 import React,{Component} from 'react';
 import Menu from './Menu';
-import { Button, Dropdown,NavItem } from 'react-materialize';
+import { Button, Dropdown1,NavItem } from 'react-materialize';
 import logo from '../images/logo.png';
 import {Link , Redirect} from 'react-router-dom';
 import axios from 'axios'
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 class Header extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+          dropdownOpen: false
+        };
+      }
+    
+      toggle() {
+        this.setState(prevState => ({
+          dropdownOpen: !prevState.dropdownOpen
+        }));
+      }
     state= {
         menuShow : false,
         logout : false
@@ -59,33 +74,27 @@ class Header extends Component {
                 <div className="navbar width60 text-center">
                     <Menu />
                 </div>
-                { is_logged === "true" ?
-                <div className="user-info" onMouseEnter={this.toggleMenu.bind(this)} onMouseLeave={this.toggleMenu.bind(this) } >
-                    {/* <button className="username" > { customer.first_name } <i className="fa fa-caret-down"> </i></button>
-                    <div className={menuClass}>
-                        <ul className="">
-                            <li><Link to="/customer/account">My Account</Link></li>
-                            <li><Link to="/upload">New Order</Link></li>
-                            <li><Link to = "" onClick={this.logout.bind(this)}>Logout</Link></li>
-                        </ul>
-                    </div>  */}
-                
-
-                    <Dropdown trigger={
-                        <Button>{ customer.first_name } <i className="fa fa-caret-down"> </i></Button>
-                    }>
-                    <NavItem><Link to="/customer/account">My Account</Link></NavItem>
-                    <NavItem divider />
-                    <NavItem><Link to="/upload">New Order</Link></NavItem>
-                    <NavItem divider />
-                    <NavItem><Link to = "" onClick={this.logout.bind(this)}>Logout</Link></NavItem>
-                    </Dropdown>             
+                { is_logged === "true" ?                
+                <div className="user-info">
+                        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                        <DropdownToggle caret  className="">
+                        { customer.first_name }   <i className="fa fa-caret-down"> </i>
+                        </DropdownToggle>
+                        <DropdownMenu>
+                        {/* <DropdownItem header>Header</DropdownItem> */}
+                        <Link to="/customer/account"><Button><i class="fa fa-3x fa-newspaper-o"></i>My Account</Button></Link>
+                        <DropdownItem divider />
+                        <Link to="/upload"><Button ><i class="fa fa-3x fa-upload"></i>Upload Prescription</Button></Link>
+                        <DropdownItem divider />
+                        <Link to="" onClick={this.logout.bind(this)}><Button className="red"><i class="fa fa-4  x fa-sign-out"></i>Logout</Button></Link>
+                        </DropdownMenu>
+                    </Dropdown>
                 </div> 
                     :
                 <div className="action-links ">
-                                    <Link to="/customer/login"><button className="login">Login</button></Link>
-                                    <Link to="/customer/register"><button className="login">Sign Up</button> 
-                                </Link>
+                                    <Link to="/customer/login"><Button className="login">Login</Button></Link>
+                                    <Link to="/customer/register"><Button className="login">Sign Up</Button></Link>
+                                    <Link to="/upload"><Button className="primary">Upload Prescription</Button> </Link>
                                 </div>
                 }
             </header>
