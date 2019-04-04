@@ -33,7 +33,14 @@ nav a.sidebar-toggle{
 input::placeholder{
   color:black !important; 
 }
-n av ul.nav-menu li a{
+input{
+  /* border: 1px solid black !important; */
+  transition: none !important;
+}
+input:hover,select:hover{
+  transition: none !important;
+}
+nav ul.nav-menu li a{
   padding : 0px 10px 0px 10px !important;
 }
 nav ul li{

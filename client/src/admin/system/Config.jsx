@@ -11,7 +11,7 @@ import General from './GeneralSection.jsx'
 class Config extends React.Component{
     constructor(props){
         super(props);
-        this.state = {title : "General Information" }
+        this.state = {title : "General Information", logo : null }
         this.toggleAlert = this.toggleAlert.bind(this)
        this.saveConfig = this.saveConfig.bind(this)
     }
@@ -24,6 +24,8 @@ saveConfig = (event) =>{
     event.preventDefault()
     let admin_email_address =  event.target.elements.admin_email_address.value;
     let page_title =  event.target.elements.page_title.value;
+    // var files = this.refs.fileUpload.getInputDOMNode().files;
+    // console.log(files); return;
     var data = {page_title : page_title , admin_email_address : admin_email_address}
     fetch('/admin/config/save', {
         method: 'POST',
@@ -37,12 +39,12 @@ saveConfig = (event) =>{
         window.location.reload();
         })
     }
-
 toggleAlert= () =>{
     this.setState({ alert : !this.state.alert })
 } 
 render(){
-    const {configs} = this.state;
+    const {configs,logo} = this.state;
+    console.log(logo)
         return(
             <div className="view content-wrapper">  
                  <div className="page-head clearfix">
@@ -67,7 +69,7 @@ render(){
                         <Col sm={9} >
                         <form name="msg-box" onSubmit={this.saveConfig} >
                         <Tab.Content >
-                            <Tab.Pane eventKey="first"><General configs={configs} /></Tab.Pane>
+                            <Tab.Pane eventKey="first"><General configs={configs}  logo = {this.state.logo}/></Tab.Pane>
                             <Tab.Pane eventKey="second"></Tab.Pane>
                         </Tab.Content>
                         <Button waves='light' type="submit">Save<Icon left>save</Icon></Button>

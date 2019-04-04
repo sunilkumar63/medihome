@@ -4,13 +4,14 @@
 }
 form ::placeholder {
   color: white;
-  font-size: 1.3em;
+  font-size: 1em;
+  margin-left: 10px !important; 
 }
 .form-wrapper input{
     padding-left:10px !important;
 }
 form input:hover{
-    border: none !important;
+    /* border: none !important; */
 }
 .admin-wrapper >.header{
     background: #8dca6138;
@@ -33,6 +34,7 @@ form input:hover{
 .main-sidebar{
     background: #8dca6138;
     margin-top: 60px;
+    padding-top: 0px;
 }
 .admin-wrapper .view{
     margin-top: 15px;
@@ -197,24 +199,42 @@ input::placeholder{
 .grid-table td {
     text-transform: capitalize;
 }
-td.cancelled{
-    color: red;
-}
-td.completed{
-    color: green;
-}
-td.shipped{
-    color: orange;
-}
-td.preparing{
-    /* color: blue; */
-}
+
 input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
     font-size: 1.3rem;
 }
 label {
     font-size: 1.4rem;
 }
-.tab-view.config-page{
-    
+.tab-view.config-page >div {
+    margin-bottom: 30px;
+}
+
+.grid-container td.status {
+    text-transform: capitalize;
+    color: white;
+    font-weight: 600;
+    opacity: 0.7;
+}
+.stats .item .label{
+    opacity: 0.9;
+    color: white;
+}
+.grid-container  td.pending, .stats .pending{
+    background: black;
+}
+.grid-container  td.cancelled , .stats .cancelled{
+    background: red;
+}
+.grid-container td.completed, .stats .completed{
+    background: green;
+}
+.grid-container  td.shipped, .stats .shipped{
+    background: orange;
+}
+.grid-container  td.preparing, .stats .preparing{
+    background: blue;
+}
+.grid-container  td.hold, .stats .hold{
+    background: pink;
 }

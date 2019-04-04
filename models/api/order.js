@@ -51,7 +51,7 @@ getOrders : (params) =>{
                         .then(result => resolve(result))
                         .catch(err => { console.log(err); reject(false) })
                     else
-                       orders = await OrderModel.find().sort('-date')
+                       orders = await OrderModel.find().sort({createdAt : 1})
                         .populate('customer','first_name last_name email_address')
                         .then(result => resolve(result))
                         .catch(err => { console.log(err); reject(false) })
@@ -145,29 +145,6 @@ updateStatus : (id , status_code) =>{
     })
 },
 
-getStats : async (cb) =>{
-    var stats_arr = {}
-    var pending_count = await OrderModel.find({status : 1}).exec();
-    stats_arr['pending'] = pending_count.length;
-    var stats_arr = {}
-    var pending_count = await OrderModel.find({status : 1}).exec();
-    stats_arr['pending'] = pending_count.length;
-    var preparing_count = await OrderModel.find({status : 2}).exec();
-    stats_arr['preparing'] = preparing_count.length;
-    var preparing_count = await OrderModel.find({status : 2}).exec();
-    stats_arr['preparing'] = preparing_count.length
-    var shipped_count = await OrderModel.find({status : 3}).exec();
-    stats_arr['shipped'] = shipped_count.length
-    var completed_count = await OrderModel.find({status : 6}).exec();
-    stats_arr['completed'] = completed_count.length
-    var hold_count = await OrderModel.find({status : 4}).exec();
-    stats_arr['hold'] = hold_count.length
-    var can_count = await OrderModel.find({status : 0}).exec();
-    stats_arr['cancelled'] = can_count.length
-    return new Promise((resolve, reject) =>{
-        resolve(stats_arr)
-    })
-},
 getStatistics : async (cb) =>{
     var stats_arr = {}
     var pending=preparing=shipped=hold=cancelled=completed = 0;

@@ -9,6 +9,7 @@ class OrderGrid extends React.Component{
         super();
         this.state = {orders : null , stats : null}
         this.editRow = this.editRow.bind(this)
+        this.filterGrid = this.filterGrid.bind(this)
     }
 
     componentDidMount(){
@@ -17,6 +18,9 @@ class OrderGrid extends React.Component{
     }
     editRow=(order_id) =>{
         this.props.history.push('/admin/order/'+order_id)
+    }
+    filterGrid = (event) =>{
+        
     }
     render(){
         const {orders} = this.props;
@@ -37,20 +41,23 @@ class OrderGrid extends React.Component{
                         </div>
                     </div>
                     <div className="stats col-sm-12 col-lg-12">
-                      <div className="item"><span className="label label-success">{stats.pending}</span>New</div>
-                      <div className="item"><span className="label label-primary">{stats.preparing}</span>Preparing </div>
-                      <div className="item"><span className="label label-danger">{stats.cancelled}</span>Cancelled </div>
-                      <div className="item"><span className="label label-warning">{stats.shipped}</span>Shipped </div>
-                      <div className="item"><span className="label label-warning">{stats.hold}</span>Hold </div>
-                      <div className="item"><span className="label label-warning">{stats.completed}</span>Completed </div>
+                      <div className="item"><span className="label pending">{stats.pending}</span>New</div>
+                      <div className="item"><span className="label preparing">{stats.preparing}</span>Preparing </div>
+                      <div className="item"><span className="label cancelled">{stats.cancelled}</span>Cancelled </div>
+                      <div className="item"><span className="label shipped">{stats.shipped}</span>Shipped </div>
+                      <div className="item"><span className="label hold">{stats.hold}</span>Hold </div>
+                      <div className="item"><span className="label completed">{stats.completed}</span>Completed </div>
                     </div>
                 </div>
                 
                 <div className = "grid-container">                
+                <div className = "grid-wrapper">                
                 { orders && 
                     <table className="table-hover table responsive">
                     <thead>
-                        <tr><td>#</td><td>Customer Name</td><td>Grand Total</td><td>Medicines</td><td>Order Date</td><td>Status</td><td>Actions</td></tr>
+                        <tr><td>ID</td><td>Customer Name</td><td>Grand Total</td><td>Medicines</td><td>Order Date</td><td>Status</td><td>Actions</td></tr>
+                            <tr><td><input type="text" ref="id" onKeyUp={this.filterGrid} /></td><td><input type="text" name="customer" /></td><td><input type="text" name="customer" /></td>
+                            <td><input type="text" name="customer" /></td><td><input type="text" name="customer" /></td><td><input type="text" name="customer" /></td></tr>
                     </thead>
                     <tbody>
                         { orders.map( (order,index) => { 
@@ -61,6 +68,7 @@ class OrderGrid extends React.Component{
                     </tbody>
                     </table>
                 }
+                </div>
                 </div>
              </div>
         )

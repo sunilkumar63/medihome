@@ -109,30 +109,30 @@ submit = (event) =>{
                 
                 <FileUpload file = {this.handleselectedFile} isDragActive="true" required ="true" />
                 <form onSubmit={this.submit.bind(this)} className="order-form" method="post">
-                <Row>
-                <Input l={6} label="Name/Title" placeholder="" name="name" validate required><Icon left>account_circle</Icon></Input>
-                </Row>
-                <Row>
-                <Input l={12}  type='select' label="Select Customer" name="customer_id" defaultValue=""  onChange={ this.updateAddress.bind(this) } required>
+                <div className="form-group">
+                 <Input l={6}  placeholder="Name/Title" name="name" validate required></Input>
+                </div>
+                <div className="form-group">
+                <Input l={12}  type='select' placeholder="Select Customer" name="customer_id" defaultValue=""  onChange={ this.updateAddress.bind(this) } required>
                 <option name="">--Select Customer--</option>
                     { customers.map((customer,index) => {
                                 return <option  key={customer.id} value={customer.id} >{customer.first_name} {customer.last_name}, {customer.mobile_no}</option>
                                 })
                     }                  
                 </Input>
-                </Row>
-                <Row>
-                <Input l={12}  type='select' label="Choose Shipping Address" placeholder="" name="shipping_address" defaultValue="" required>
+                </div>
+                <div className="form-group">
+                <Input l={12}  type='select' placeholder="Choose Shipping Address"  name="shipping_address" defaultValue="" required>
                 <option name="">--Select Address--</option>
                     { addresses.map((address,index) => {
                                 return <option  key={address.id} value={address.id} >{address.name},{address.city},{address.address}</option>
                                 })
                     }                  
                 </Input>
-                </Row>
-                <Row>
-                <Input type='textarea' label="Message, If Any" placeholder="" name='message' icon="email" />
-                </Row>
+                </div>
+                <div className="form-group">
+                <Input type='textarea' placeholder="Message, If Any" name='message' icon="email" />
+                </div>
                 <Button  type='submit' className="red" ><Icon left>shopping_cart</Icon> Place Order</Button>
                 { loading &&     <Preloader size='small' flashing/>   }
                 </form>
