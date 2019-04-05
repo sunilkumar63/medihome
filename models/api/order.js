@@ -44,19 +44,20 @@ getOrder : async (id,entity) =>{
 },
  
 getOrders : (params) =>{
-    return new Promise( async (resolve, reject) => { log(params)
-                    if(params.type === 'filter')
+    return new Promise( async (resolve, reject) => { 
+                    if(params.type === 'filter') {
                        delete params['type']; console.log(params)
                        order  = await OrderModel.find(params).sort({"createdAt" : 1})
                        .populate('customer','first_name last_name email_address' )
                        .then(result => resolve(result))
                        .catch(err => { console.log(err); reject(false) })
-                    if(params.type === 'recent') 
+                    }
+                       if(params.type === 'recent')
                         orders = await OrderModel.find().limit(5)
                         .populate('customer','first_name last_name email_address')
-                        .then(result => resolve(result))
+                        .then(result => resolve(result) )
                         .catch(err => { console.log(err); reject(false) })
-                    else
+                      else
                        orders = await OrderModel.find().sort({createdAt : 1})
                         .populate('customer','first_name last_name email_address'  )
                         .then(result => resolve(result))
