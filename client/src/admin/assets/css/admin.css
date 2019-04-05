@@ -13,6 +13,9 @@ form ::placeholder {
 form input:hover{
     /* border: none !important; */
 }
+.grid-container select.status {
+    display: block !important;
+}
 .admin-wrapper >.header{
     background: #8dca6138;
     width: 100%;

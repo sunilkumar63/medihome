@@ -44,7 +44,13 @@ getOrder : async (id,entity) =>{
 },
  
 getOrders : (params) =>{
-    return new Promise( async (resolve, reject) => {
+    return new Promise( async (resolve, reject) => { log(params)
+                    if(params.type === 'filter')
+                       delete params['type']; console.log(params)
+                       order  = await OrderModel.find(params).sort({"createdAt" : 1})
+                       .populate('customer','first_name last_name email_address' )
+                       .then(result => resolve(result))
+                       .catch(err => { console.log(err); reject(false) })
                     if(params.type === 'recent') 
                         orders = await OrderModel.find().limit(5)
                         .populate('customer','first_name last_name email_address')
@@ -52,7 +58,7 @@ getOrders : (params) =>{
                         .catch(err => { console.log(err); reject(false) })
                     else
                        orders = await OrderModel.find().sort({createdAt : 1})
-                        .populate('customer','first_name last_name email_address')
+                        .populate('customer','first_name last_name email_address'  )
                         .then(result => resolve(result))
                         .catch(err => { console.log(err); reject(false) })
     })
@@ -63,7 +69,9 @@ getCollection : () =>{
      OrderModel.find().populate('customer','first_name last_name').then( result => resolve(result) ).catch(error => reject(error))
     })
 },
-
+queryOrders : async (filters) =>{
+    return await OrderModel.find(filters).exec();
+},
 updateStatus : (id , status_code) =>{
     return new Promise( (resolve, reject) => {
         if(status_code === 3) { 

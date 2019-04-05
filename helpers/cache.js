@@ -1,5 +1,8 @@
 // var Memcached =  require('memcached');
-const redis = require('redis');
+// const redis = require('redis');
+var cache = require('memory-cache');
+var newCache = new cache.Cache();
+console.log("Cache Memory Size ", cache.memsize());
 // const client = redis.createClient();
 // client.on('error', (err) => {
 //     console.log("Redis Error " + err);
@@ -41,5 +44,25 @@ module.exports.redisMiddleware = (duration=10) => {
             next();
         }
     });
+  }
+  };
+
+  module.exports.mcacheMiddleware = (duration=10) => {
+    return  (req,res,next) => { 
+    let key = "__medi_cache__" + req.originalUrl || req.url;
+    var data =  cache.get(key)
+        if(data) {  
+          console.log("cache hit")
+            res.send(data);
+        }else{ 
+          //  log("no cache")
+            res.sendResponse = res.send;
+            res.send = (body) => {  
+                cache.put(key, body)
+                  // console.log("cache saved")
+                res.sendResponse(body);
+            }
+            next();
+        }
   }
   };

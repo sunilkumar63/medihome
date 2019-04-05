@@ -1,3 +1,4 @@
+import { promised } from "q";
 
 export async function updateOrderStatus(order_id,status ,callback) {
 	await fetch('/api/order/updatestatus/'+order_id+"/"+status)
@@ -21,4 +22,7 @@ export async function shipOrder(order_data,callback) {
 export async function fetchOrderStatus(id,callback) {
 	let status = [{ 0 : 'pending' , 1 : 'preparing' , 3: 'shipped' , 4 : 'hold', 5 : 'completed' , 0 : 'cancelled'}]
 	callback(status[id])
+}
+export function  statusObject(callback)  {
+	callback({ 1 : 'pending' , 2 : 'preparing' , 3: 'shipped' , 4 : 'hold',5 : 'unhold', 6 : 'completed' , 0 : 'cancelled' })
 }

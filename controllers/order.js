@@ -1,7 +1,8 @@
 let express = require('express');
 let router = express.Router({ strict: true });
 var order_api = require('../models/api/order')
-var redis  = require('../helpers/cache')
+var cache  = require('../helpers/cache')
+
 router.get('/api/customer/order/:customer_id?' , (req, res , next) =>{
     var cust_id ;
     if(req.session.customer) {
@@ -27,13 +28,18 @@ router.get('/api/order/:id/:entity?' , async (req, res , next) =>{
                     .catch(err => res.json(err))
 })
 
-router.get('/api/orders/:type?' , redis.redisMiddleware() , async (req, res , next) =>{    
+router.get('/api/orders/:type?'  , async (req, res , next) =>{    
     var data = await order_api.getOrders(req.params)
     if(data){
         res.json(data)
     }
 })
-
+router.post('/api/filter/order' , async (req, res , next) =>{    
+    var data = await order_api.getOrders(req.body)
+    if(data){
+        res.json(data)
+    }
+})
 router.get('/api/order/updatestatus/:id/:status' , async (req, res , next) =>{   
     var is_updated = await order_api.updateStatus(req.params.id,req.params.status)
     if(is_updated) res.send(true)
@@ -44,7 +50,7 @@ router.post('/api/order/:id/ship' , async (req, res , next) =>{
     if(is_updated) res.send(true)
     else res.send(false)
 })
-router.get('/api/order_stats' , async (req,res,next) =>{ 
+router.get('/api/order_stats' , cache.mcacheMiddleware(), async (req,res,next) =>{ 
     var data = await order_api.getStatistics();
     res.json(data);
 })

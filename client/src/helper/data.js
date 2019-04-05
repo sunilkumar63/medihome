@@ -16,3 +16,16 @@ export function getConfigValue(section_id,field_name) {
        return result;
       })
 }
+
+export async function customerHtml(callback) {
+ var options = []
+fetch('/api/customers/active').then(res => res.json()).then(customers =>{
+  customers.map(customer =>{
+    let customer_tmp_option = {}
+     customer_tmp_option.label  = customer.full_name
+     customer_tmp_option.value  = customer.id
+     options.push(customer_tmp_option)
+  })
+})
+callback(options)
+}

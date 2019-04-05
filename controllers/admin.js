@@ -3,18 +3,19 @@ let router = express.Router();
 var admin_api =  require('../models/api/admin')
 var customer_api =  require('../models/api/provider')
 var order_api =  require('../models/api/order')
+var cache  = require('../helpers/cache')
 
 router.post('/admin/config/save' , (req,res,next) =>{
     admin_api.saveConfig(req.body).then(result => res.json(result)).catch(err => res.json(false)) 
 })  
 router.post('/admin/config/fetch' , (req,res,next) =>{ 
     var count = Object.keys(req.query).length;
-    if(count === 0)
+    if(count === 0) 
         admin_api.getAllConfig().then( configs => res.send(configs))
      else
         admin_api.getConfig(req.query).then( configs => res.send(configs))
 })
-router.get('/admin/basic/info' , async (req,res,next) =>{ 
+router.get('/admin/basic/info' , cache.mcacheMiddleware() , async (req,res,next) =>{ 
     var data = await admin_api.getBasicConfig();
     res.json(data);
 })
