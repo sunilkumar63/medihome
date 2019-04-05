@@ -42,7 +42,7 @@ getOrder : async (id,entity) =>{
     else reject({error : true , message : 'invalid order ID'})
     }).catch(err => null)
 },
-
+ 
 getOrders : (params) =>{
     return new Promise( async (resolve, reject) => {
                     if(params.type === 'recent') 
