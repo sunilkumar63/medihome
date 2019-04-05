@@ -20,7 +20,7 @@ class OrderGrid extends React.Component{
         this.props.history.push('/admin/order/'+order_id)
     }
     filterGrid = (event) =>{
-        
+
     }
     render(){
         const {orders} = this.props;
