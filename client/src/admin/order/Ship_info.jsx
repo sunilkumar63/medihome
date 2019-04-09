@@ -12,7 +12,7 @@ class Ship_info extends React.Component {
 render(){
         let {order} = this.props;
         return (
-            !order ? <h5>No shipment available</h5> : 
+            !order  ? <h5>No shipment available</h5> : 
             <div className="tab-view"> 
                 {
                     (order.status == 3 || order.status == 6) && 

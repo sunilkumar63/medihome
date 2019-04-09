@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router({ strict: true });
 var order_api = require('../models/api/order')
 var cache  = require('../helpers/cache')
-
+var pdf = require('html-pdf'); 
 router.get('/api/customer/order/:customer_id?' , (req, res , next) =>{
     var cust_id ;
     if(req.session.customer) {
@@ -55,4 +55,12 @@ router.get('/api/order_stats' , cache.mcacheMiddleware(), async (req,res,next) =
     res.json(data);
 })
 
+router.get('/api/v3/order/download/invoice/:id', (req,res,next)=>{
+    var html = '<html><head><title>PDF Test</title></head><body><h1>Welcome</h1><p>This is a test to see if we can get <b>PDF generation</b> to work on the server side.</p><p>PDF files can be very tricky to do on the server so this will take a bit of <u>hit and trail</u> before we can be confident it works fine.</p></body></html>';
+    var fileName = 'invoice_1.pdf';
+    pdf.create(html).toFile(`public/invoice/${fileName}` ,(  err, stream) => {
+    if (err) return console.log(err);
+    else res.json({filepath: `public/invoice/${fileName}`})
+  });
+})
 module.exports = router;

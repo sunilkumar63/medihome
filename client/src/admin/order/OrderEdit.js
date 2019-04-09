@@ -7,6 +7,7 @@ import SweetAlert from 'react-bootstrap-sweetalert'
 import {updateOrderStatus,shipOrder} from '../../helper/order_hlp'
 import Basic  from './Basic.jsx';
 import Medicine  from './Medicine.jsx';
+import Invoice  from './Invoice.jsx';
 import Prescriptions from './Prescription.jsx'  
 import Shipment from './Ship_info.jsx'  
 import TalkHistory from './TalkHistory.jsx'  
@@ -147,7 +148,7 @@ render(){
                         <Nav bsStyle="pills" stacked>
                             <NavItem eventKey="first" onClick ={this.handlePageTitle}>Information</NavItem>
                             <NavItem eventKey="second" onClick ={this.handlePageTitle}>Medicine List</NavItem>
-                            <NavItem eventKey="third" onClick ={this.handlePageTitle}>Invoices</NavItem>
+                            <NavItem eventKey="third" onClick ={this.handlePageTitle}>Invoice</NavItem>
                             <NavItem eventKey="fourth" onClick ={this.handlePageTitle}>Prescriptions</NavItem>
                             <NavItem eventKey="five" onClick ={this.handlePageTitle}>Shipment</NavItem>
                             <NavItem eventKey="sixth" onClick ={this.handlePageTitle}>Talk History</NavItem>
@@ -157,6 +158,7 @@ render(){
                         <Tab.Content animation>
                             <Tab.Pane eventKey="first"><Basic order={order}  /></Tab.Pane>
                             <Tab.Pane eventKey="second"><Medicine medicines={order.medicines}  /></Tab.Pane>
+                            <Tab.Pane eventKey="third"><Invoice order={order}  /></Tab.Pane>
                            <Tab.Pane eventKey="fourth"> <Prescriptions prescription ={order.prescription}/></Tab.Pane> 
                            <Tab.Pane eventKey="five"> <Shipment order ={order}/></Tab.Pane> 
                            <Tab.Pane eventKey="sixth"><TalkHistory order={order} /></Tab.Pane>

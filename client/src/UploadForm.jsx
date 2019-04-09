@@ -102,7 +102,7 @@ submit = (event) =>{
                     <div className ="t2">Prescription should be a image and in jpg,png or jpeg format.</div>
                 </div>
                 
-                <FileUpload file = {this.handleselectedFile} isDragActive="true" required ="true" />
+                <FileUpload file = {this.handleselectedFile} isDragActiv required />
                 <form onSubmit={this.submit.bind(this)} className="order-form" method="post">
                 <Row>
                 <Input l={6} label="Name/Title" placeholder="" name="name" validate required><Icon>account_circle</Icon></Input>
