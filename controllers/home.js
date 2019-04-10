@@ -14,9 +14,50 @@ var Storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: Storage })
+var AWS = require('aws-sdk');
 
 router.get('/api/test' , async (req, res , next) =>{
-    res.json(global.presc_image_path)
+
+    var unirest = require("unirest");
+var req = unirest("GET", "https://www.fast2sms.com/dev/bulk");
+req.query({
+  "authorization": "VkJqPEzi9ntC3QYUwlp0a614TZsmcvN2SR5LbuDyed7OAKXxfgWjqPuFyHwMI429XJnYgxeLQrSfvD7d",
+  "sender_id": "FSTSMS",
+  "language": "english",
+  "route": "p",
+  "variables": "{AA}|{CC}",
+  "variables_values": "12345|asdaswdx",
+  "numbers": "8802459529,8368917209",
+  "message": "dsdss",
+});
+
+req.headers({
+  "cache-control": "no-cache"
+});
+req.end(function (res) {
+  if (res.error) console.log(res.error);
+  console.log(res.body);
+});
+
+return;
+
+AWS.config.region = 'us-east-1';
+AWS.config.update({
+      accessKeyId: "AKIAJVNSWFNDH66JDI5A",
+      secretAccessKey: "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",
+});
+
+var sns = new AWS.SNS();
+var params = {
+    Message: "test email",
+    MessageStructure: 'string',
+    PhoneNumber: '+918368917209'
+};
+
+sns.publish(params, function(err, data) {
+    if (err) console.log(err, err.stack); // an error occurred
+    else     console.log(data);           // successful response
+});
 })
 
 router.post('/api/customer/register' , (req, res , next) =>{

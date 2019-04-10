@@ -29,11 +29,11 @@ import axios from 'axios';
                 localStorage.setItem("isAuthenticated",true)
             }
     })
-    fetch('/admin/basic/info')
-        .then(res =>res.json())
-        .then( data => {
-            this.setState({header_content : data});
-        })    
+    // fetch('/admin/basic/info')
+    //     .then(res =>res.json())
+    //     .then( data => {
+    //         this.setState({header_content : data});
+    //     })    
 }
 
     logout = () => {
@@ -51,9 +51,9 @@ import axios from 'axios';
                 marginLeft : 0,
                 background: "none"
         }       
-        const {isAuthenticated, header_content} = this.state;
-        var isAuth = localStorage.getItem("isAuthenticated")        
-        if(header_content == null) return null;
+        const {isAuthenticated} = this.state;
+        var isAuth = localStorage.getItem("isAuthenticated")   
+        var header_content = {page_title : "MediHome", logo : "/static/media/logo.1646f94f.png"}
         return (
             header_content &&
             <header className="main-header header"><img src={logo} width="50px"></img>

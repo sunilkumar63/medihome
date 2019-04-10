@@ -16,6 +16,7 @@ var session = require('express-session');
 var MemoryStore = session.MemoryStore;
 var cookieParser = require('cookie-parser');
 let connection = require('./config/db').connection;
+let config = require('./config/env.json');
 
 //OPTIMISATION
 var cluster = require('cluster');
@@ -41,6 +42,8 @@ app.use(cookieSession({
     // store: new MemoryStore(),
     saveUninitialized: true
 })); 
+//Set KEY API JWT AUTHx
+app.set('secret', config.secret);
 
 app.use(responseTime())
 // app.use(morgan('tiny'))
@@ -83,7 +86,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);

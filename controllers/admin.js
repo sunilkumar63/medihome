@@ -4,7 +4,11 @@ var admin_api =  require('../models/api/admin')
 var customer_api =  require('../models/api/provider')
 var order_api =  require('../models/api/order')
 var cache  = require('../helpers/cache')
+var  jwt    = require('jsonwebtoken');
+let config = require('../config/env.json');
 
+  
+//Set KEY API JWT AUTHx
 router.post('/admin/config/save' , (req,res,next) =>{
     admin_api.saveConfig(req.body).then(result => res.json(result)).catch(err => res.json(false)) 
 })  
@@ -84,5 +88,12 @@ router.post('/admin/order/save' , async (req, res , next) =>{
                     })
                 .catch(err => console.error(err))
  })
-
+ 
+ router.get('/auth' , async (req, res , next) =>{ console.log(req.app.get('secret'))
+ const payload = { check:  true};
+  var token = jwt.sign(payload, 'heymynameismohamedaymen', {
+        expiresIn: 1440 // expires in 24 hours
+  }); 
+  res.json({  message: 'authentication done ',  token: token });
+})
 module.exports = router

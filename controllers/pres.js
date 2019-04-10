@@ -4,7 +4,6 @@ var customer_api = require('../models/api/provider')
 var medicine_api = require('../models/api/medicine')
 var order_api = require('../models/api/order')
 var OrderModel =  require('../models/order');
-
 router.get('/api/prescription/:customer_id?' , (req, res , next) =>{
     var cust_id ;
     // console.log("ses " , nn); return
