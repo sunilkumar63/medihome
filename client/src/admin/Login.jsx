@@ -82,6 +82,7 @@ render() {
                     <Input
                             name="password"                        
                             placeholder="Password"
+                            value = "123"
                             missingMessage="This field is required."
                             autoComplete =  "off"
                             isRequired
