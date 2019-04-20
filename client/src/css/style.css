@@ -6,7 +6,9 @@ body{
   font-family: 'Roboto', sans-serif;
   color: #ffff;
 }
-
+strong{
+    font-weight: 600;
+}
 .toast{
   background: mediumseagreen !important;
   font-size: 1.5rem;
